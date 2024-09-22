@@ -33,7 +33,7 @@ fixable = ["ALL"]
 unfixable = []
 
 [tool.mypy]
-ignore-patterns = "tests/*"
+exclude = "tests/*"
 
 [tool.pylint]
 ignore-patterns = "tests/*"

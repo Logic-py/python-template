@@ -9,4 +9,5 @@ if __name__ == "__main__":
     b = 1
 
     print(a + b)
+    print(b + a)
     example(data=5)

@@ -17,3 +17,10 @@ repos:
         types: [ python ]
         args: [ "--config", "pyproject.toml" ]
         pass_filenames: true
+      - id: mypy-type-check
+        name: Type Checking
+        entry: poetry run mypy
+        language: system
+        types: [ python ]
+        args: [ "--config", "pyproject.toml" ]
+        pass_filenames: true
