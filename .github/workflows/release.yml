@@ -16,7 +16,8 @@ jobs:
       - name: Read version from pyproject.toml
         id: get_version
         run: |
-          echo "VERSION=$(grep '^version =' pyproject.toml | cut -d ' ' -f 3)" >> $GITHUB_ENV
+          VERSION=$(grep '^version =' pyproject.toml | cut -d ' ' -f 3 | tr -d '"')
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
