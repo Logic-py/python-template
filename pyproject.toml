@@ -12,7 +12,6 @@ python = "^3.12"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.6.7"
 mypy = "^1.11.2"
-pylint = "^3.3.0"
 pre-commit = "^3.8.0"
 
 [tool.ruff]
@@ -34,9 +33,6 @@ unfixable = []
 
 [tool.mypy]
 exclude = "tests/*"
-
-[tool.pylint]
-ignore-patterns = "tests/*"
 
 [build-system]
 requires = ["poetry-core"]
