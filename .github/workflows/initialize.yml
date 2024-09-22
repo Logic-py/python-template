@@ -13,7 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Check for initial commit
+        id: check_initial_commit
+        run: |
+          if git rev-list --count HEAD | grep -q '^0$'; then
+            echo "This is the initial commit."
+            echo "is_initial=true" >> $GITHUB_ENV
+          else
+            echo "This repository already has commits."
+            echo "is_initial=false" >> $GITHUB_ENV
+          fi
+
       - name: Set Repository Name and Description
+        if: env.is_initial == 'true'  # Only run if it's the initial commit
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
           REPO_DESC="${{ github.event.repository.description }}"
@@ -25,6 +37,7 @@ jobs:
           sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
 
       - name: Commit changes
+        if: env.is_initial == 'true'  # Only run if it's the initial commit
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -34,7 +47,7 @@ jobs:
           # Push to main
           git push origin main
 
-          # Create develop branch if it doesn't exist and push
+          # Create develop branch and push
           git checkout -B develop
           git push origin develop --force
         env:
