@@ -13,9 +13,17 @@ python = "^3.12"
 ruff = "^0.6.7"
 mypy = "^1.11.2"
 pylint = "^3.3.0"
+pre-commit = "^3.8.0"
 
 [tool.ruff]
-exclude = ["tests/*"]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
 
 [tool.mypy]
 ignore-patterns = "tests/*"
