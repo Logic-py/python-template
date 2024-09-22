@@ -1,13 +1,25 @@
-def example(data: str):
-    print(data)
+"""Public module example."""
+
+from loguru import logger
+
+
+def example(data: str) -> None:
+    """Use this docstring as an example for an Example function.
+
+    Args:
+        data: a string
+
+    Returns:
+        Nothing
+
+    """
+    logger.info(data)
 
 
 if __name__ == "__main__":
-    print("hello world")
+    logger.info("hello world")
 
     a = 5
     b = 1
 
-    print(a + b)
-    print(b + a)
-    example(data=5)
+    example(data="5")
