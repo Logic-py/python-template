@@ -1,0 +1,33 @@
+name: Initialize Repository
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Repository Name
+        run: |
+          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          VERSION="0.1.0"
+
+          # Update the pyproject.toml with the repository name
+          sed -i "s/^name = .*/name = \"$REPO_NAME\"/" pyproject.toml
+          sed -i "s/^version = .*/version = \"$VERSION\"/" pyproject.toml
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add pyproject.toml
+          git commit -m "Initialize repository with correct pyproject.toml"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
