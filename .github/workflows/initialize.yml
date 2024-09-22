@@ -16,8 +16,8 @@ jobs:
       - name: Set Repository Name and Description
         run: |
           REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
-          REPO_DESC="${{ github.event.repository.description }}"  # Get the description
-          VERSION="0.0.1"  # Set a default version
+          REPO_DESC="${{ github.event.repository.description }}"
+          VERSION="0.0.1"
 
           # Update the pyproject.toml with the repository name and description
           sed -i "s/^name = .*/name = \"$REPO_NAME\"/" pyproject.toml
@@ -30,6 +30,12 @@ jobs:
           git config --local user.name "GitHub Action"
           git add pyproject.toml
           git commit -m "chore: initialize repository"
-          git push
+          
+          # Push to main
+          git push origin main
+
+          # Create develop branch if it doesn't exist and push
+          git checkout -B develop
+          git push origin develop --force
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
