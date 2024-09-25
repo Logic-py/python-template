@@ -1,15 +1,17 @@
 name: Create Release
 
 on:
-  workflow_run:
-    workflows: [ "Format, Lint, and Type Check" ]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   create_release:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
+    needs:
+      - Format, Lint, and Type Check
 
     steps:
       - name: Checkout code
