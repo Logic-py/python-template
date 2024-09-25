@@ -23,20 +23,16 @@ A template project for Python, designed to streamline the creation of Python pro
 
 To get started with this template, follow these steps:
 
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/yourusername/python-template.git
-   cd python-template
-   ```
+1. **Clone the repository or use the template directly via GitHub:**
 
 2. **Install Poetry:**
 
    Make sure you have [Poetry](https://python-poetry.org/) installed. If not, you can install it using:
-
    ```bash
    pip install poetry
    ```
+
+   This template was setup using Poetry version 1.8.3
 
 3. **Install dependencies:**
 
@@ -44,9 +40,10 @@ To get started with this template, follow these steps:
    poetry install
    ```
 
-4. **Run the application or tests:**
+4. **Ready to Implement:**
 
-   Depending on your setup, you can now run your application or execute tests.
+   You're now ready to implement whatever you need. Keep in mind that this is just a base template and not a fully
+   functioning application.
 
 ## CI/CD Workflow
 
@@ -61,7 +58,7 @@ GitHub Actions to run the following jobs:
 
 ### Workflow File
 
-The CI workflow is defined in `.github/workflows/ci.yml`.
+The CI workflow is defined in `.github/workflows/ci_check_release.yml`.
 
 ## Dependencies
 
@@ -85,10 +82,10 @@ This repository employs several tools to maintain code quality:
 
 ### Pre-commit Hooks
 
-To set up pre-commit hooks for automatic formatting and linting on commit, install pre-commit:
+To set up pre-commit hooks for automatic formatting and linting on commit, make sure pre-commit is installed:
 
 ```bash
-pip install pre-commit
+poetry install
 ```
 
 Then, install the hooks:
@@ -96,16 +93,6 @@ Then, install the hooks:
 ```bash
 pre-commit install
 ```
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them.
-4. Push to your forked repository.
-5. Create a pull request explaining your changes.
 
 ## License
 
