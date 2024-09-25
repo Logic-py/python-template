@@ -11,7 +11,6 @@ best practices.
 - [Dependencies](#dependencies)
 - [Code Quality](#code-quality)
 - [Pre-commit Hooks](#pre-commit-hooks)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Features
