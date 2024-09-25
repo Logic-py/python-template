@@ -1,6 +1,6 @@
 # Python Template
 
-A template project for Python, designed to streamline the creation of Python projects using best practices.
+This is a template project for Python, designed to streamline the creation of Python projects using best practices.
 
 ## Table of Contents
 
@@ -9,6 +9,7 @@ A template project for Python, designed to streamline the creation of Python pro
 - [CI/CD Workflow](#cicd-workflow)
 - [Dependencies](#dependencies)
 - [Code Quality](#code-quality)
+- [Pre-commit Hooks](#pre-commit-hooks)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -17,22 +18,21 @@ A template project for Python, designed to streamline the creation of Python pro
 - Automated testing and deployment with GitHub Actions.
 - Code formatting and linting using [Ruff](https://ruff.rs).
 - Type checking with [Mypy](https://mypy.readthedocs.io).
-- Pre-commit hooks for maintaining code quality.
+- Pre-commit hooks to maintain code quality.
 
 ## Getting Started
 
-To get started with this template, follow these steps:
+Follow these steps to get started with this template:
 
-1. **Clone the repository or use the template directly via GitHub:**
+1. **Clone the repository or use the template directly via GitHub.**
 
 2. **Install Poetry:**
 
-   Make sure you have [Poetry](https://python-poetry.org/) installed. If not, you can install it using:
+   Ensure you have [Poetry](https://python-poetry.org/) installed. If not, you can install it using:
    ```bash
    pip install poetry
    ```
-
-   This template was setup using Poetry version 1.8.3
+   > **Note:** This template is set up using Poetry version 1.8.3.
 
 3. **Install dependencies:**
 
@@ -42,16 +42,16 @@ To get started with this template, follow these steps:
 
 4. **Ready to Implement:**
 
-   You're now ready to implement whatever you need. Keep in mind that this is just a base template and not a fully
-   functioning application.
+   You are now ready to implement your project. Keep in mind that this is a base template and not a fully functioning
+   application.
 
 ## CI/CD Workflow
 
-This project includes a continuous integration (CI) workflow that is triggered on every push and pull request. It uses
+This project includes a continuous integration (CI) workflow that is triggered on every push and pull request, using
 GitHub Actions to run the following jobs:
 
 1. **Setup**: Checks out the code, sets up Python, and installs dependencies using Poetry.
-2. **Format**: Formats the code using Ruff.
+2. **Format**: Formats the code with Ruff.
 3. **Lint**: Runs linting on the codebase with Ruff.
 4. **Type Check**: Checks for type consistency using Mypy.
 5. **Create Release**: Automatically creates a GitHub release when code is pushed to the main branch.
@@ -62,7 +62,7 @@ The CI workflow is defined in `.github/workflows/ci_check_release.yml`.
 
 ## Dependencies
 
-This project uses the following dependencies:
+This project includes the following dependencies:
 
 - **Core Dependencies**:
     - `python`: ^3.12
@@ -75,14 +75,14 @@ This project uses the following dependencies:
 
 ## Code Quality
 
-This repository employs several tools to maintain code quality:
+This repository employs several tools to ensure code quality:
 
-- **Ruff**: A fast Python linter and formatter that enforces a consistent style and catches potential errors.
-- **Mypy**: A static type checker for Python, ensuring type safety.
+- **Ruff**: A fast Python linter and formatter that enforces a consistent style and detects potential errors.
+- **Mypy**: A static type checker for Python that ensures type safety.
 
 ## Pre-commit Hooks
 
-To set up pre-commit hooks for automatic formatting and linting on commit, make sure pre-commit is installed:
+To set up pre-commit hooks for automatic formatting and linting on commit, ensure `pre-commit` is installed:
 
 ```bash
 poetry install
@@ -96,22 +96,20 @@ pre-commit install
 
 Once installed, the hooks will run automatically before each commit.
 
-### Pre-Commit Hooks Configuration
+### Pre-commit Hooks Configuration
 
-This repository uses pre-commit hooks to enforce code quality and standards before committing changes. Below is a
-high-level overview of the configured hooks.
+This repository uses pre-commit hooks to enforce code quality and standards before committing changes. Here’s an
+overview of the configured hooks:
 
 #### 1. Commitlint Hook
 
-- **Purpose:** Ensures commit messages adhere to defined conventions for consistency and clarity.
+- **Purpose**: Ensures commit messages adhere to defined conventions for consistency and clarity.
 
 #### 2. Local Hooks
 
-- **Ruff Format:** Automatically formats Python code according to specified rules.
-- **Ruff Lint:** Performs linting to catch potential errors and maintain coding standards.
-- **Mypy Type Check:** Checks type annotations for consistency and correctness in Python code.
-
-#### Resources
+- **Ruff Format**: Automatically formats Python code according to specified rules.
+- **Ruff Lint**: Performs linting to catch potential errors and maintain coding standards.
+- **Mypy Type Check**: Checks type annotations for consistency and correctness in Python code.
 
 For more information on pre-commit, visit [pre-commit.com](https://pre-commit.com).
 
