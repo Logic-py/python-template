@@ -71,6 +71,7 @@ This project includes the following dependencies:
     - `ruff`: ^0.6.7 (for code linting and formatting)
     - `mypy`: ^1.11.2 (for type checking)
     - `pre-commit`: ^3.8.0 (for managing Git hooks)
+    - `pytest`: ^7.2.0 (for unit testing)
 
 ## Code Quality
 
@@ -109,6 +110,7 @@ overview of the configured hooks:
 - **Ruff Format**: Automatically formats Python code according to specified rules.
 - **Ruff Lint**: Performs linting to catch potential errors and maintain coding standards.
 - **Mypy Type Check**: Checks type annotations for consistency and correctness in Python code.
+- **Pytest**: Runs the tests found in the /tests folder.
 
 For more information on pre-commit, visit [pre-commit.com](https://pre-commit.com).
 
