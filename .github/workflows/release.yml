@@ -11,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     needs:
-      - Format, Lint, and Type Check
+      - format
+      - lint
+      - type-check
 
     steps:
       - name: Checkout code
