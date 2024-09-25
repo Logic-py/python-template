@@ -15,7 +15,6 @@ This is a template project for Python, designed to streamline the creation of Py
 
 ## Features
 
-- Automated testing and deployment with GitHub Actions.
 - Code formatting and linting using [Ruff](https://ruff.rs).
 - Type checking with [Mypy](https://mypy.readthedocs.io).
 - Pre-commit hooks to maintain code quality.
