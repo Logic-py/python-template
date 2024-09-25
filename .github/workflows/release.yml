@@ -6,9 +6,6 @@ on:
       - "Format, Lint, and Type Check"
     types:
       - completed
-  push:
-    branches:
-      - main
 
 jobs:
   release:
