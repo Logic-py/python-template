@@ -1,35 +1,40 @@
 name: Create Release
 
 on:
-  workflow_run:
-    workflows: [ "Format, Lint, and Type Check" ]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   create_release:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    needs: lint  # Ensure the lint job has succeeded
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Read version from pyproject.toml
-        id: read_version
-        run: |
-          # Extract the version using grep from pyproject.toml
-          VERSION=$(grep '^version =' pyproject.toml | sed -E 's/version = "(.+)"/\1/')
-          echo "VERSION=$VERSION"
-          echo "::set-output name=version::$VERSION"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-      - name: Create GitHub Release
-        id: create_release
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+
+      - name: Read version from pyproject.toml
+        id: get_version
+        run: |
+          VERSION=$(poetry version --short)
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.VERSION }}
           release_name: Release ${{ env.VERSION }}
-          body: "Release generated automatically from pyproject.toml version."
           draft: false
           prerelease: false
         env:
