@@ -19,9 +19,13 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install dependencies
+      - name: Install Poetry
         run: |
           pip install poetry
+          echo "$(poetry env info --path)/bin" >> $GITHUB_PATH  # Add poetry to the PATH
+
+      - name: Install dependencies
+        run: |
           poetry install
 
   format:
