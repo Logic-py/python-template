@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  create_release:
+  rel_test:
     runs-on: ubuntu-latest
     needs: lint  # Ensure the lint job has succeeded
 
