@@ -1,6 +1,11 @@
 name: Create Release
 
 on:
+  workflow_run:
+    workflows:
+      - "Format, Lint, and Type Check"
+    types:
+      - completed
   push:
     branches:
       - main
