@@ -65,7 +65,7 @@ This project includes the following dependencies:
 
 - **Core Dependencies**:
     - `python`: ^3.12
-    - `loguru`: ^0.7.2
+    - `loguru`: ^0.7.2 (useful logging package)
 
 - **Development Dependencies**:
     - `ruff`: ^0.6.7 (for code linting and formatting)
