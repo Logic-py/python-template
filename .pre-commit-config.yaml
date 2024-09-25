@@ -24,6 +24,7 @@ repos:
         types: [ python ]
         args: [ "--config", "pyproject.toml" ]
         pass_filenames: true
+        exclude: tests
 
       - id: mypy-type-check
         name: Type Checking
