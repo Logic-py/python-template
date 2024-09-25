@@ -80,7 +80,7 @@ This repository employs several tools to maintain code quality:
 - **Ruff**: A fast Python linter and formatter that enforces a consistent style and catches potential errors.
 - **Mypy**: A static type checker for Python, ensuring type safety.
 
-### Pre-commit Hooks
+## Pre-commit Hooks
 
 To set up pre-commit hooks for automatic formatting and linting on commit, make sure pre-commit is installed:
 
@@ -93,6 +93,27 @@ Then, install the hooks:
 ```bash
 pre-commit install
 ```
+
+Once installed, the hooks will run automatically before each commit.
+
+### Pre-Commit Hooks Configuration
+
+This repository uses pre-commit hooks to enforce code quality and standards before committing changes. Below is a
+high-level overview of the configured hooks.
+
+#### 1. Commitlint Hook
+
+- **Purpose:** Ensures commit messages adhere to defined conventions for consistency and clarity.
+
+#### 2. Local Hooks
+
+- **Ruff Format:** Automatically formats Python code according to specified rules.
+- **Ruff Lint:** Performs linting to catch potential errors and maintain coding standards.
+- **Mypy Type Check:** Checks type annotations for consistency and correctness in Python code.
+
+#### Resources
+
+For more information on pre-commit, visit [pre-commit.com](https://pre-commit.com).
 
 ## License
 
