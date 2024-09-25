@@ -1,6 +1,7 @@
 # Python Template
 
-This is a template project for Python, designed to streamline the creation of Python projects using best practices.
+This is a template project for Python, designed to streamline the creation of Python projects using (What I think are)
+best practices.
 
 ## Table of Contents
 
