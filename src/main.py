@@ -22,4 +22,4 @@ if __name__ == "__main__":
     a = 5
     b = 1
 
-    example(data="5")
+    example(data=str(a + b))

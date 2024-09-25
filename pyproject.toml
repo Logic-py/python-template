@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-template"
-version = "0.3.4"
+version = "0.4.0"
 description = "Used to templatize python projects."
 authors = ["Loïc Motheu <lmotheu@gmail.com>"]
 readme = "README.md"
@@ -11,9 +11,10 @@ python = "^3.12"
 loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.6.7"
 mypy = "^1.11.2"
 pre-commit = "^3.8.0"
+pytest = "^8.3.3"
+ruff = "^0.6.7"
 
 [tool.ruff]
 src = ["src"]
@@ -28,9 +29,10 @@ line-ending = "auto"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D203", "COM812", "ISC001", "D213"]
+ignore = ["D203", "COM812", "ISC001", "D213", "FA102"]
 fixable = ["ALL"]
 unfixable = []
+exclude = ["tests/*"]
 
 [tool.mypy]
 exclude = "tests/*"
