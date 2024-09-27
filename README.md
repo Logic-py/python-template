@@ -1,5 +1,7 @@
 # Python Template
 
+![Build Status](https://github.com/logic-py/python-template/actions/workflows/ci_check_release.yml/badge.svg)
+
 This is a template project for Python, designed to streamline the creation of Python projects using (What I think are)
 best practices.
 
