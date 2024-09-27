@@ -64,7 +64,7 @@ The CI workflow is defined in `.github/workflows/ci_check_release.yml`.
 This project includes the following dependencies:
 
 - **Core Dependencies**:
-    - `python`: ^3.12
+    - `python`: ^3.12 (switch the .python-version file to your liking)
     - `loguru`: ^0.7.2 (useful logging package)
 
 - **Development Dependencies**:
@@ -88,10 +88,10 @@ To set up pre-commit hooks for automatic formatting and linting on commit, ensur
 poetry install
 ```
 
-Then, install the hooks:
+Then with poetry installed, install the hooks:
 
 ```bash
-pre-commit install
+poetry run pre-commit install
 ```
 
 Once installed, the hooks will run automatically before each commit.
@@ -111,6 +111,18 @@ overview of the configured hooks:
 - **Ruff Lint**: Performs linting to catch potential errors and maintain coding standards.
 - **Mypy Type Check**: Checks type annotations for consistency and correctness in Python code.
 - **Pytest**: Runs the tests found in the /tests folder.
+
+### Run the hooks locally:
+
+```bash
+poetry run pre-commit run <HOOK-ID>
+```
+
+For example, run the ruff formatter:
+
+```bash
+poetry run pre-commit run ruff-format
+```
 
 For more information on pre-commit, visit [pre-commit.com](https://pre-commit.com).
 
