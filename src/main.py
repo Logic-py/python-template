@@ -7,7 +7,7 @@ def example(data: str) -> None:
     """Use this docstring as an example for an Example function.
 
     Args:
-        data: a string
+        data: a string, testing
 
     Returns:
         Nothing
