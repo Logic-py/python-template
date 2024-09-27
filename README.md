@@ -72,7 +72,7 @@ This project includes the following dependencies:
     - `loguru`: ^0.7.2 (useful logging package)
 
 - **Development Dependencies**:
-    - `ruff`: ^0.6.7 (for code linting and formatting)
+    - `ruff`: ^0.6.8 (for code linting and formatting)
     - `mypy`: ^1.11.2 (for type checking)
     - `pre-commit`: ^3.8.0 (for managing Git hooks)
     - `pytest`: ^7.2.0 (for unit testing)
