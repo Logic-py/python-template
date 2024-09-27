@@ -2,6 +2,7 @@
 
 ![Build Status](https://github.com/logic-py/python-template/actions/workflows/ci_check_release.yml/badge.svg)
 ![License](https://img.shields.io/github/license/logic-py/python-template.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/logic-py/python-template)
 
 This is a template project for Python, designed to streamline the creation of Python projects using (What I think are)
 best practices.
