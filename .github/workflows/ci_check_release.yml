@@ -85,6 +85,10 @@ jobs:
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
       - name: Run Ruff Linting
         run: |
           poetry run ruff check --config pyproject.toml .
@@ -109,6 +113,10 @@ jobs:
             ~/.cache/pypoetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
 
       - name: Run Mypy Type Checking
         run: |
@@ -135,6 +143,10 @@ jobs:
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
       - name: Run Unit Tests
         run: |
           poetry run pytest
@@ -160,6 +172,10 @@ jobs:
             ~/.cache/pypoetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
 
       - name: Read version from pyproject.toml
         id: get_version
