@@ -48,6 +48,14 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Restore Poetry Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
       - name: Install Poetry
         run: |
           pip install poetry
@@ -72,6 +80,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Restore Poetry Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Poetry
         run: |
@@ -98,6 +114,14 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Restore Poetry Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
       - name: Install Poetry
         run: |
           pip install poetry
@@ -122,6 +146,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Restore Poetry Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Poetry
         run: |
@@ -148,6 +180,14 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Restore Poetry Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Poetry
         run: |
