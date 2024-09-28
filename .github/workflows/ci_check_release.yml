@@ -56,6 +56,10 @@ jobs:
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
       - name: Run Ruff Formatting
         run: |
           poetry run ruff format --config pyproject.toml .
