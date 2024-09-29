@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Setup Python Environment
-        uses: .github/setup-environment
+        uses: /.github/setup-environment
         with:
           python-version: '3.12'
 
