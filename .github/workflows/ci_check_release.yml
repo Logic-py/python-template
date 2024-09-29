@@ -10,14 +10,14 @@ jobs:
   setup:
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v4  # Ensure the code is checked out first
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Ensure the code is checked out first
 
-    - name: Setup Python Environment
-      uses: ./.github/actions/setup-env  # Correct relative path to the action
-      with:
-        python-version: '3.12'
+      - name: Setup Python Environment
+        uses: ./.github/actions/setup-env  # Correct relative path to the action
+        with:
+          python-version: '3.12'
 
   format:
     runs-on: ubuntu-latest
