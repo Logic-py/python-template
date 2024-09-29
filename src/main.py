@@ -14,6 +14,7 @@ def example(data: str) -> None:
 
     """
     logger.info(data)
+    logger.info(data)
 
 
 if __name__ == "__main__":

@@ -31,5 +31,5 @@ repos:
         entry: poetry run mypy
         language: python
         types_or: [ python, pyi, jupyter ]
-        args: [ "--config", "pyproject.toml", "src/" ]
+        args: [ "--config", "pyproject.toml" ]
         pass_filenames: true
