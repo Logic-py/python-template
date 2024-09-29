@@ -8,7 +8,13 @@ on:
 
 jobs:
   setup:
-    uses: ./.github/workflows/setup-env.yml  # Call the reusable workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Python Environment
+        uses: ./.github/actions/setup-env
+        with:
+          python-version: '3.12'
 
   format:
     runs-on: ubuntu-latest
