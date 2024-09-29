@@ -24,8 +24,11 @@ jobs:
     needs: setup  # Dependency on setup job
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Install Poetry
+        run: |
+          pip install poetry
+          echo "Poetry installed"
+          echo "$HOME/.poetry/bin" >> $GITHUB_PATH  # Add Poetry to the PATH
 
       - name: Run Ruff Formatting
         run: |
