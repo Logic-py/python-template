@@ -19,6 +19,14 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Cache virtual environment
+        uses: actions/cache@v4
+        with:
+          path: .venv  # Cache the virtual environment directory
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
+
       - name: Install Poetry and dependencies
         run: |
           # Create virtual environment with Poetry and install dependencies
@@ -27,14 +35,6 @@ jobs:
             poetry config virtualenvs.in-project true  # Create the virtual environment in the project directory
             poetry install
           fi
-
-      - name: Cache virtual environment
-        uses: actions/cache@v4
-        with:
-          path: .venv  # Cache the virtual environment directory
-          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
 
   format:
     runs-on: ubuntu-latest
@@ -59,8 +59,7 @@ jobs:
 
       - name: Run Ruff Formatting
         run: |
-          source .venv/bin/activate
-          poetry run ruff format --config pyproject.toml src/
+          .venv/bin/poetry run ruff format --config pyproject.toml src/
 
   lint:
     runs-on: ubuntu-latest
@@ -85,8 +84,7 @@ jobs:
 
       - name: Run Ruff Linting
         run: |
-          source .venv/bin/activate
-          poetry run ruff check --config pyproject.toml src/
+          .venv/bin/poetry run ruff check --config pyproject.toml src/
 
   type-check:
     runs-on: ubuntu-latest
@@ -111,8 +109,7 @@ jobs:
 
       - name: Run Mypy Type Checking
         run: |
-          source .venv/bin/activate
-          poetry run mypy --config-file pyproject.toml src/
+          .venv/bin/poetry run mypy --config-file pyproject.toml src/
 
   test:
     runs-on: ubuntu-latest
@@ -137,8 +134,7 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          source .venv/bin/activate
-          poetry run pytest
+          .venv/bin/poetry run pytest
 
   create_release:
     runs-on: ubuntu-latest
@@ -165,8 +161,7 @@ jobs:
       - name: Read version from pyproject.toml
         id: get_version
         run: |
-          source .venv/bin/activate
-          VERSION=$(poetry version --short)
+          VERSION=$(.venv/bin/poetry version --short)
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
       - name: Create Release
