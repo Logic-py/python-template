@@ -19,21 +19,26 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Poetry
-        run: |
-          pip install poetry
-
-      - name: Install dependencies
-        run: |
-          poetry install
-
-      - name: Cache Poetry
+      - name: Cache Poetry and Dependencies
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pypoetry
+            ~/.local/bin/poetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Install Poetry if not cached
+        run: |
+          if [ ! -x ~/.local/bin/poetry ]; then
+            pip install poetry
+          fi
+
+      - name: Install dependencies
+        run: |
+          poetry install
 
   format:
     runs-on: ubuntu-latest
@@ -48,17 +53,16 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry Cache
+      - name: Restore Poetry and Dependencies Cache
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pypoetry
+            ~/.local/bin/poetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install Poetry
-        run: |
-          pip install poetry
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
       - name: Run Ruff Formatting
         run: |
@@ -77,17 +81,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry Cache
+      - name: Restore Poetry and Dependencies Cache
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pypoetry
+            ~/.local/bin/poetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-      - name: Install Poetry
+      - name: Install Poetry if not cached
         run: |
-          pip install poetry
+          if [ ! -x ~/.local/bin/poetry ]; then
+            pip install poetry
+          fi
 
       - name: Run Ruff Linting
         run: |
@@ -106,17 +115,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry Cache
+      - name: Restore Poetry and Dependencies Cache
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pypoetry
+            ~/.local/bin/poetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-      - name: Install Poetry
+      - name: Install Poetry if not cached
         run: |
-          pip install poetry
+          if [ ! -x ~/.local/bin/poetry ]; then
+            pip install poetry
+          fi
 
       - name: Run Mypy Type Checking
         run: |
@@ -135,17 +149,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry Cache
+      - name: Restore Poetry and Dependencies Cache
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pypoetry
+            ~/.local/bin/poetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-      - name: Install Poetry
+      - name: Install Poetry if not cached
         run: |
-          pip install poetry
+          if [ ! -x ~/.local/bin/poetry ]; then
+            pip install poetry
+          fi
 
       - name: Run Unit Tests
         run: |
@@ -165,17 +184,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry Cache
+      - name: Restore Poetry and Dependencies Cache
         uses: actions/cache@v4
         with:
           path: |
             ~/.cache/pypoetry
+            ~/.local/bin/poetry
             ~/.poetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
 
-      - name: Install Poetry
+      - name: Install Poetry if not cached
         run: |
-          pip install poetry
+          if [ ! -x ~/.local/bin/poetry ]; then
+            pip install poetry
+          fi
 
       - name: Read version from pyproject.toml
         id: get_version
