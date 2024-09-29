@@ -21,6 +21,7 @@ runs:
     - name: Install Poetry
       run: |
         pip install poetry
+      shell: bash  # Ensure shell is explicitly set
 
     - name: Restore Poetry Cache
       uses: actions/cache@v4
@@ -33,3 +34,4 @@ runs:
     - name: Install dependencies
       run: |
         poetry install
+      shell: bash  # Ensure shell is explicitly set
