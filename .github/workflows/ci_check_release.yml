@@ -70,7 +70,7 @@ jobs:
 
       - name: Run Ruff Formatting
         run: |
-          .venv/bin/poetry run ruff format --config pyproject.toml src/
+          poetry run ruff format --config pyproject.toml src/
 
   lint:
     runs-on: ubuntu-latest
