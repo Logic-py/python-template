@@ -19,14 +19,6 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Cache virtual environment
-        uses: actions/cache@v4
-        with:
-          path: .venv  # Cache the virtual environment directory
-          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-venv-
-
       - name: Install Poetry and dependencies
         run: |
           # Check if virtual environment exists, create if not
@@ -39,14 +31,13 @@ jobs:
             echo "Virtual environment exists, skipping creation."
           fi
 
-      - name: Verify Poetry Installation
-        run: |
-          if [ -f ".venv/bin/poetry" ]; then
-            echo "Poetry is installed in the virtual environment."
-          else
-            echo "Poetry is NOT installed in the virtual environment."
-            exit 1
-          fi
+      - name: Cache virtual environment
+        uses: actions/cache@v4
+        with:
+          path: .venv  # Cache the virtual environment directory
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
 
   format:
     runs-on: ubuntu-latest
