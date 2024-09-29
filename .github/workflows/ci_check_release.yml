@@ -19,26 +19,22 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Cache Poetry and Dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/bin/poetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-poetry-
-
-      - name: Install Poetry if not cached
+      - name: Install Poetry and dependencies
         run: |
-          if [ ! -x ~/.local/bin/poetry ]; then
+          # Create virtual environment with Poetry and install dependencies
+          if [ ! -d ".venv" ]; then
             pip install poetry
+            poetry config virtualenvs.in-project true  # Create the virtual environment in the project directory
+            poetry install
           fi
 
-      - name: Install dependencies
-        run: |
-          poetry install
+      - name: Cache virtual environment
+        uses: actions/cache@v4
+        with:
+          path: .venv  # Cache the virtual environment directory
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-venv-
 
   format:
     runs-on: ubuntu-latest
@@ -53,19 +49,17 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry and Dependencies Cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/bin/poetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          path: .venv  # Restore the virtual environment
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-poetry-
+            ${{ runner.os }}-venv-
 
       - name: Run Ruff Formatting
         run: |
+          source .venv/bin/activate
           poetry run ruff format --config pyproject.toml src/
 
   lint:
@@ -81,25 +75,17 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry and Dependencies Cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/bin/poetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          path: .venv  # Restore the virtual environment
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-poetry-
-
-      - name: Install Poetry if not cached
-        run: |
-          if [ ! -x ~/.local/bin/poetry ]; then
-            pip install poetry
-          fi
+            ${{ runner.os }}-venv-
 
       - name: Run Ruff Linting
         run: |
+          source .venv/bin/activate
           poetry run ruff check --config pyproject.toml src/
 
   type-check:
@@ -115,25 +101,17 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry and Dependencies Cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/bin/poetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          path: .venv  # Restore the virtual environment
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-poetry-
-
-      - name: Install Poetry if not cached
-        run: |
-          if [ ! -x ~/.local/bin/poetry ]; then
-            pip install poetry
-          fi
+            ${{ runner.os }}-venv-
 
       - name: Run Mypy Type Checking
         run: |
+          source .venv/bin/activate
           poetry run mypy --config-file pyproject.toml src/
 
   test:
@@ -149,25 +127,17 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry and Dependencies Cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/bin/poetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          path: .venv  # Restore the virtual environment
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-poetry-
-
-      - name: Install Poetry if not cached
-        run: |
-          if [ ! -x ~/.local/bin/poetry ]; then
-            pip install poetry
-          fi
+            ${{ runner.os }}-venv-
 
       - name: Run Unit Tests
         run: |
+          source .venv/bin/activate
           poetry run pytest
 
   create_release:
@@ -184,26 +154,18 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Restore Poetry and Dependencies Cache
+      - name: Restore virtual environment cache
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.local/bin/poetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          path: .venv  # Restore the virtual environment
+          key: ${{ runner.os }}-venv-${{ hashFiles('**/poetry.lock') }}
           restore-keys: |
-            ${{ runner.os }}-poetry-
-
-      - name: Install Poetry if not cached
-        run: |
-          if [ ! -x ~/.local/bin/poetry ]; then
-            pip install poetry
-          fi
+            ${{ runner.os }}-venv-
 
       - name: Read version from pyproject.toml
         id: get_version
         run: |
+          source .venv/bin/activate
           VERSION=$(poetry version --short)
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
