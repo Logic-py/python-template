@@ -62,7 +62,7 @@ jobs:
 
       - name: Run Ruff Formatting
         run: |
-          poetry run ruff format --config pyproject.toml .
+          poetry run ruff format --config pyproject.toml src/
 
   lint:
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
 
       - name: Run Ruff Linting
         run: |
-          poetry run ruff check --config pyproject.toml .
+          poetry run ruff check --config pyproject.toml src/
 
   type-check:
     runs-on: ubuntu-latest
@@ -120,7 +120,7 @@ jobs:
 
       - name: Run Mypy Type Checking
         run: |
-          poetry run mypy --config-file pyproject.toml .
+          poetry run mypy --config-file pyproject.toml src/
 
   test:
     runs-on: ubuntu-latest
