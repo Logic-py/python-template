@@ -29,11 +29,14 @@ jobs:
 
       - name: Install Poetry and dependencies
         run: |
-          # Create virtual environment with Poetry and install dependencies
+          # Check if virtual environment exists, create if not
           if [ ! -d ".venv" ]; then
+            echo "No .venv found, creating virtual environment..."
             pip install poetry
-            poetry config virtualenvs.in-project true  # Create the virtual environment in the project directory
-            poetry install
+            poetry config virtualenvs.in-project true  # Ensure the virtual environment is inside the project
+            poetry install  # Install all dependencies
+          else
+            echo "Virtual environment exists, skipping creation."
           fi
 
       - name: Verify Poetry Installation
@@ -66,13 +69,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-venv-
 
-      - name: Verify Poetry Installation
+      - name: Run Poetry to Install Dependencies (if needed)
         run: |
-          if [ -f ".venv/bin/poetry" ]; then
-            echo "Poetry is installed in the virtual environment."
-          else
-            echo "Poetry is NOT installed in the virtual environment."
-            exit 1
+          if [ ! -d ".venv" ]; then
+            pip install poetry
+            poetry config virtualenvs.in-project true
+            poetry install
           fi
 
       - name: Run Ruff Formatting
