@@ -161,6 +161,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Fetch all history
+          ref: main  # Explicitly checkout main branch
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -187,6 +188,16 @@ jobs:
             echo "CREATE_RELEASE=false" >> $GITHUB_ENV
           fi
 
+      - name: Find Previous Release
+        if: env.CREATE_RELEASE == 'true'
+        id: previous_release
+        run: |
+          git fetch --tags
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
+          fi
+
       - name: Generate Release Notes
         if: env.CREATE_RELEASE == 'true'
         id: release_notes
@@ -196,17 +207,9 @@ jobs:
           version: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
           disable-releaser: true  # Prevent creating a draft release
+          commitish: main  # Explicitly use main branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Find Previous Release
-        if: env.CREATE_RELEASE == 'true'
-        id: previous_release
-        run: |
-          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
-          if [ -n "$PREV_TAG" ]; then
-            echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
-          fi
 
       - name: Generate Compare URL
         if: env.CREATE_RELEASE == 'true'
@@ -230,5 +233,6 @@ jobs:
             **Full Changelog**: ${{ env.URL }}
           draft: false
           prerelease: false
+          commitish: main  # Explicitly use main branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
