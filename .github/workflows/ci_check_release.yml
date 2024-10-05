@@ -186,8 +186,8 @@ jobs:
       - name: Generate Release Notes
         id: release_notes
         uses: release-drafter/release-drafter@v6
-        publish: true
         with:
+          publish: true
           config-name: release-drafter.yml
           version: ${{ env.VERSION }}
         env:
