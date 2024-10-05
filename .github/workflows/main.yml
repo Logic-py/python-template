@@ -8,4 +8,4 @@ on:
 
 jobs:
   format:
-    uses: ./.github/workflows/format.yml
+    uses: ./.github/workflows/format.yml  # Call the format workflow as a job
