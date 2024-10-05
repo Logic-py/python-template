@@ -221,6 +221,12 @@ jobs:
             echo "URL=${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.VERSION }}" >> $GITHUB_ENV
           fi
 
+      - name: Debug Release Notes
+        if: env.CREATE_RELEASE == 'true'
+        run: |
+          echo "Release Notes Body:"
+          echo "${{ steps.release_notes.outputs.body }}"
+
       - name: Create Release
         if: env.CREATE_RELEASE == 'true'
         uses: softprops/action-gh-release@v2
