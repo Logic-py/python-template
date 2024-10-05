@@ -8,6 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python and dependencies
+        run: |
+          pip install poetry
+          poetry install
+
       - name: Run Ruff Formatting
         run: |
           poetry run ruff format --config pyproject.toml src/
