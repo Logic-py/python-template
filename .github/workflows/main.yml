@@ -1,10 +1,10 @@
 name: Main Workflow
 
 on:
-  push: # Trigger on push events to any branch
+  push:  # Trigger on push events to any branch
   pull_request: # Trigger on pull request events to any branch
     branches:
-      - '**' # Matches all branches
+      - '**'  # Matches all branches
 
 jobs:
   call-format:
@@ -15,4 +15,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Call Format Workflow
-        uses: ./.github/workflows/format.yml  # Call the format workflow
+        uses: ./.github/workflows/format.yml  # Reference to the format workflow
