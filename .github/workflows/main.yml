@@ -1,0 +1,20 @@
+name: Main Workflow
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if necessary
+  pull_request:
+    branches:
+      - main  # Change this to your default branch if necessary
+
+jobs:
+  call-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Call Format Workflow
+        uses: ./.github/workflows/format.yml  # Call the format workflow
