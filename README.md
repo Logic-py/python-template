@@ -12,9 +12,13 @@ best practices.
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [CI/CD Workflow](#cicd-workflow)
+    - [Workflow File](#workflow-file)
 - [Dependencies](#dependencies)
+    - [Optional: Pyenv](#optional-pyenv)
 - [Code Quality](#code-quality)
 - [Pre-commit Hooks](#pre-commit-hooks)
+    - [Pre-commit Hooks Configuration](#pre-commit-hooks-configuration)
+    - [Run the Hooks Locally](#run-the-hooks-locally)
 - [License](#license)
 
 ## Features
@@ -68,7 +72,7 @@ The CI workflow is defined in `.github/workflows/ci_check_release.yml`.
 This project includes the following dependencies:
 
 - **Core Dependencies**:
-    - `python`: ^3.12 (switch the .python-version file to your liking)
+    - `python`: ^3.12 (switch the `.python-version` file to your liking)
     - `loguru`: ^0.7.2 (useful logging package)
 
 - **Development Dependencies**:
@@ -77,54 +81,54 @@ This project includes the following dependencies:
     - `pre-commit`: ^3.8.0 (for managing Git hooks)
     - `pytest`: ^7.2.0 (for unit testing)
 
+### Optional: Pyenv
+
 <details>
-<summary><h2>(Optional) Pyenv</h2></summary>
+<summary>Useful pyenv commands</summary>
 
-### Useful pyenv commands
-
-Updating pyenv, this will refresh the python mirrors to find latest python versions available.
+Updating pyenv will refresh the Python mirrors to find the latest Python versions available:
 
 ```bash
 pyenv update
 ```
 
-This will list all available python version to be installed.
+List all available Python versions:
 
 ```bash
 pyenv install --list
 ```
 
-This will download & install the provided python version.
+Download & install a specific Python version:
 
 ```bash
 pyenv install 3.12.7
 ```
 
-This will list what python version is set by your system.
+List the global Python version set by your system:
 
 ```bash
 pyenv global
 ```
 
-This will list what python version is set in your folder/project.
+List the Python version set for your project/folder:
 
 ```bash
 pyenv local
 ```
 
-This will set the global python version of your system.
+Set the global Python version for your system:
 
 ```bash
 pyenv global 3.12.7
 ```
 
-This will set the local python version of your folder/project.
+Set the local Python version for your project:
 
 ```bash
 pyenv local 3.12.7
 ```
 
-Feel free to utilize Pyenv and change the .python-version file to your liking.
+Feel free to utilize Pyenv and modify the `.python-version` file to your preference.
 
 </details>
 
@@ -143,7 +147,7 @@ To set up pre-commit hooks for automatic formatting and linting on commit, ensur
 poetry install
 ```
 
-Then with poetry installed, install the hooks:
+Then, install the hooks:
 
 ```bash
 poetry run pre-commit install
@@ -165,15 +169,17 @@ overview of the configured hooks:
 - **Ruff Format**: Automatically formats Python code according to specified rules.
 - **Ruff Lint**: Performs linting to catch potential errors and maintain coding standards.
 - **Mypy Type Check**: Checks type annotations for consistency and correctness in Python code.
-- **Pytest**: Runs the tests found in the /tests folder.
+- **Pytest**: Runs the tests found in the `/tests` folder.
 
-### Run the hooks locally:
+### Run the Hooks Locally
+
+You can run specific hooks manually using:
 
 ```bash
 poetry run pre-commit run <HOOK-ID>
 ```
 
-For example, run the ruff formatter:
+For example, to run the Ruff formatter:
 
 ```bash
 poetry run pre-commit run ruff-format
