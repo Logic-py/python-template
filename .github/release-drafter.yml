@@ -26,15 +26,24 @@ categories:
     commit-matcher:
       - '/^chore:/'
       - '/^refactor:/'
-  - title: '🔧 Other Changes'
-    labels:
-      - 'other'
+  - title: 'Other'
     commit-matcher:
-      - '/^style:/'
-      - '/^test:/'
-      - '/^ci:/'
+      - '/.+/'
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&'
+
+include-labels:
+  - 'feature'
+  - 'enhancement'
+  - 'fix'
+  - 'bugfix'
+  - 'bug'
+  - 'documentation'
+  - 'maintenance'
+
+include-commits: true
+include-pull-requests: true
 
 version-resolver:
   major:
@@ -51,6 +60,6 @@ version-resolver:
 template: |
   ## What's Changed
   $CHANGES
-
+  
   ## 👥 Contributors
   $CONTRIBUTORS
