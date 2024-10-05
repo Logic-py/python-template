@@ -185,16 +185,20 @@ jobs:
 
       - name: Generate Release Notes
         id: release_notes
-        run: |
-          notes=$(release-drafter --config release-drafter.yml)
-          echo "draft_body=${notes}" >> $GITHUB_ENV
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: release-drafter/release-drafter@v6
+        publish: true
         with:
-          tag_name: ${{ env.VERSION }}
-          body: ${{ env.draft_body }}
-          draft: false
-          prerelease: false
+          config-name: release-drafter.yml
+          version: ${{ env.VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+#      - name: Create Release
+#        uses: softprops/action-gh-release@v2
+#        with:
+#          tag_name: ${{ env.VERSION }}
+#          body: ${{ steps.release_notes.outputs.draft_body }}
+#          draft: false
+#          prerelease: false
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
