@@ -72,10 +72,63 @@ This project includes the following dependencies:
     - `loguru`: ^0.7.2 (useful logging package)
 
 - **Development Dependencies**:
-    - `ruff`: ^0.6.8 (for code linting and formatting)
+    - `ruff`: ^0.6.9 (for code linting and formatting)
     - `mypy`: ^1.11.2 (for type checking)
     - `pre-commit`: ^3.8.0 (for managing Git hooks)
     - `pytest`: ^7.2.0 (for unit testing)
+
+<details>
+<summary>### Optional Dependency</summary>
+
+### Optional Dependency
+
+### Useful pyenv commands
+
+Updating pyenv, this will refresh the python mirrors to find latest python versions available.
+
+```bash
+pyenv update
+```
+
+This will list all available python version to be installed.
+
+```bash
+pyenv install --list
+```
+
+This will download & install the provided python version.
+
+```bash
+pyenv install 3.12.7
+```
+
+This will list what python version is set by your system.
+
+```bash
+pyenv global
+```
+
+This will list what python version is set in your folder/project.
+
+```bash
+pyenv local
+```
+
+This will set the global python version of your system.
+
+```bash
+pyenv global 3.12.7
+```
+
+This will set the local python version of your folder/project.
+
+```bash
+pyenv local 3.12.7
+```
+
+Feel free to utilize Pyenv and change the .python-version file to your liking.
+
+</details>
 
 ## Code Quality
 
