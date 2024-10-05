@@ -11,11 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python and dependencies
-        run: |
-          pip install poetry
-          poetry install
+      # Call the reusable setup workflow
+      - name: Call Setup Workflow
+        uses: ./.github/workflows/setup.yml
 
+      # Run Ruff formatting after setup
       - name: Run Ruff Formatting
         run: |
           poetry run ruff format --config pyproject.toml src/
