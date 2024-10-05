@@ -44,7 +44,7 @@ template: |
   ## 👥 Contributors
   $CONTRIBUTORS
   
-  **Full Changelog**: $COMPARE_URL
+  **Full Changelog1**: $COMPARE_URL
 
 exclude-labels:
   - 'skip-changelog'

@@ -233,6 +233,6 @@ jobs:
             **Full Changelog**: ${{ env.URL }}
           draft: false
           prerelease: false
-          commitish: main  # Explicitly use main branch
+          target_commitish: main  # Explicitly use main branch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
