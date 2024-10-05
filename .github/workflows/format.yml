@@ -11,9 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Call the reusable setup workflow properly
+      # Properly call the setup workflow
       - name: Call Setup Workflow
-        uses: setup.yml  # Correctly referencing the reusable workflow
+        uses: ./setup.yml  # Direct path to the setup.yml within the same repo
 
       # Run Ruff formatting after setup
       - name: Run Ruff Formatting
