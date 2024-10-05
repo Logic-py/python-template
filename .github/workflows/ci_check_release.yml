@@ -203,13 +203,28 @@ jobs:
         id: release_notes
         uses: release-drafter/release-drafter@v6
         with:
-          config-name: release-drafter.yml
+          config-name: release-drafter.yml  # Update this path
           version: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
-          disable-releaser: true  # Prevent creating a draft release
-          commitish: main  # Explicitly use main branch
+          disable-releaser: true
+          commitish: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Debug step to verify configuration loading
+      - name: Debug Release Drafter
+        if: env.CREATE_RELEASE == 'true'
+        run: |
+          echo "Configuration path: release-drafter.yml"
+          if [ -f "release-drafter.yml" ]; then
+            echo "Configuration file exists"
+            cat release-drafter.yml
+          else
+            echo "Configuration file not found"
+            find . -name "release-drafter.yml"
+          fi
+          echo "Release Notes Body:"
+          echo "${{ steps.release_notes.outputs.body }}"
 
       - name: Generate Compare URL
         if: env.CREATE_RELEASE == 'true'
