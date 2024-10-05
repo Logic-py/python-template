@@ -11,8 +11,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Call Setup Workflow
-        uses: ./.github/workflows/setup.yml  # Correctly referencing the setup workflow as a job
+      - name: Call Setup Action
+        uses: ./.github/actions/setup-python-poetry
+        with:
+          python-version: '3.12'
 
       - name: Run Ruff Formatting
         run: |
