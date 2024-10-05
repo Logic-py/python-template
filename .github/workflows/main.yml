@@ -1,12 +1,10 @@
 name: Main Workflow
 
 on:
-  push:
+  push: # Trigger on push events to any branch
+  pull_request: # Trigger on pull request events to any branch
     branches:
-      - main  # Change this to your default branch if necessary
-  pull_request:
-    branches:
-      - main  # Change this to your default branch if necessary
+      - '**' # Matches all branches
 
 jobs:
   call-format:
