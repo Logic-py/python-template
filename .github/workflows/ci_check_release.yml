@@ -227,6 +227,7 @@ jobs:
           echo "Release Notes Body:"
           echo "${{ steps.release_notes.outputs.body }}"
           echo "${{ steps.release_notes }}"
+          echo "${{ steps.release_notes.outputs }}"
 
       - name: Create Release
         if: env.CREATE_RELEASE == 'true'
