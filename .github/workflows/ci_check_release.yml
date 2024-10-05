@@ -198,19 +198,6 @@ jobs:
             echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
           fi
 
-      - name: Generate Release Notes
-        if: env.CREATE_RELEASE == 'true'
-        id: release_notes
-        uses: release-drafter/release-drafter@v6
-        with:
-          config-name: .github/release-drafter.yml  # Update this path
-          version: ${{ env.VERSION }}
-          tag: ${{ env.VERSION }}
-          disable-releaser: false
-          commitish: main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Generate Compare URL
         if: env.CREATE_RELEASE == 'true'
         id: compare_url
@@ -236,8 +223,6 @@ jobs:
           tag_name: ${{ env.VERSION }}
           name: ${{ env.VERSION }}
           body: |
-            ${{ steps.release_notes.outputs.body }}
-            
             **Full Changelog**: ${{ env.URL }}
           draft: false
           prerelease: false
