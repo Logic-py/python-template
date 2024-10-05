@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Python and Poetry
-        uses: ./.github/actions/common/setup-python-poetry.yml
+        uses: ./.github/actions/common
         with:
           python-version: '3.12'
 
