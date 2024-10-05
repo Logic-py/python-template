@@ -11,9 +11,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Call the reusable setup workflow
+      # Call the reusable setup workflow using the correct syntax
       - name: Call Setup Workflow
-        uses: ./.github/workflows/setup.yml
+        uses: ./.github/workflows/setup.yml@feature/better-ci # Replace 'main' with your branch if necessary
 
       # Run Ruff formatting after setup
       - name: Run Ruff Formatting
