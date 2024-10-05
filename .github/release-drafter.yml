@@ -5,6 +5,7 @@ categories:
     labels:
       - feat
       - feature
+      - Feature
   - title: '🐛 Bug Fixes'
     labels:
       - fix
