@@ -7,26 +7,19 @@ on:
   pull_request:
 
 jobs:
-  setup:
-    uses: ./.github/workflows/setup.yml
-
   format:
     uses: ./.github/workflows/format.yml
-    needs: setup  # Ensure setup job has succeeded
 
   lint:
     uses: ./.github/workflows/lint.yml
-    needs: format  # Ensure format job has succeeded
 
   type-check:
     uses: ./.github/workflows/type-check.yml
-    needs: format  # Ensure format job has succeeded
 
   test:
     uses: ./.github/workflows/test.yml
-    needs: setup  # Ensure setup job has succeeded
 
   create_release:
-    uses: ./.github/workflows/create-release.yml
-    needs: [ lint, type-check, test ]  # Ensure lint, type-check, and test jobs have succeeded
-    if: github.ref == 'refs/heads/main'  # Only run on main branch
+    uses: ./.github/workflows/create_release.yml
+    needs: [ format, lint, type-check, test ]  # Run after all checks
+    if: github.ref == 'refs/heads/main'

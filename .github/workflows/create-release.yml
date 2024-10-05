@@ -1,12 +1,11 @@
 name: Create Release
 
 on:
-  workflow_call: # Allows this workflow to be called by other workflows
+  workflow_call:
 
 jobs:
   create_release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'  # Only run on main branch
 
     steps:
       - name: Checkout code
