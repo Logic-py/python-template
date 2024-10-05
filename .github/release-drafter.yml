@@ -1,5 +1,5 @@
-name-template: '$NEXT_PATCH_VERSION'
-tag-template: '$NEXT_PATCH_VERSION'
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
     labels:
@@ -7,28 +7,23 @@ categories:
       - feature
       - Feature
   - title: '🐛 Bug Fixes'
-    labels:
-      - fix
+    label: 'fix'
   - title: '📚 Documentation'
-    labels:
-      - docs
+    label: 'docs'
   - title: '🛠️ Refactoring'
-    labels:
-      - refactor
+    label: 'refactor'
   - title: '⚡️ Performance Improvements'
-    labels:
-      - perf
+    label: 'perf'
   - title: '🧪 Tests'
-    labels:
-      - test
+    label: 'test'
   - title: '🔧 Build System'
-    labels:
-      - build
+    labels: 'build'
   - title: '👷 Continuous Integration'
-    labels:
-      - ci
+    label: 'ci'
+  - title: '🧰 Maintenance'
+    label: 'chore'
 
-change-template: '- $TITLE by @$AUTHOR in $URL'
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 template: |
   ## What's Changed
   $CHANGES

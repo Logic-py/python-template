@@ -1,0 +1,23 @@
+changelog:
+  categories:
+    - title: '🚀 Features'
+      labels:
+        - feat
+        - feature
+        - Feature
+    - title: '🐛 Bug Fixes'
+      label: 'fix'
+    - title: '📚 Documentation'
+      label: 'docs'
+    - title: '🛠️ Refactoring'
+      label: 'refactor'
+    - title: '⚡️ Performance Improvements'
+      label: 'perf'
+    - title: '🧪 Tests'
+      label: 'test'
+    - title: '🔧 Build System'
+      labels: 'build'
+    - title: '👷 Continuous Integration'
+      label: 'ci'
+    - title: '🧰 Maintenance'
+      label: 'chore'
