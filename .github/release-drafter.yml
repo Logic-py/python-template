@@ -1,0 +1,35 @@
+name-template: '$NEXT_PATCH_VERSION'
+tag-template: '$NEXT_PATCH_VERSION'
+categories:
+  - title: '🚀 Features'
+    labels:
+      - feat
+      - feature
+  - title: '🐛 Bug Fixes'
+    labels:
+      - fix
+  - title: '📚 Documentation'
+    labels:
+      - docs
+  - title: '🛠️ Refactoring'
+    labels:
+      - refactor
+  - title: '⚡️ Performance Improvements'
+    labels:
+      - perf
+  - title: '🧪 Tests'
+    labels:
+      - test
+  - title: '🔧 Build System'
+    labels:
+      - build
+  - title: '👷 Continuous Integration'
+    labels:
+      - ci
+
+change-template: '- $TITLE by @$AUTHOR in $URL'
+template: |
+  ## What's Changed
+  $CHANGES
+
+  **Full Changelog**: $COMPARE_URL
