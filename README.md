@@ -78,9 +78,7 @@ This project includes the following dependencies:
     - `pytest`: ^7.2.0 (for unit testing)
 
 <details>
-<summary>### Optional Dependency</summary>
-
-### Optional Dependency
+<summary><h2>(Optional) Pyenv</h2></summary>
 
 ### Useful pyenv commands
 
