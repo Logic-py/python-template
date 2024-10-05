@@ -1,0 +1,28 @@
+name: Setup
+
+on:
+  push:
+    branches:
+      - '*'  # Trigger on all branches
+  pull_request:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Python and Poetry
+        uses: ./.github/actions/common/setup-python-poetry.yml
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          poetry install
+
+      - name: Cache Poetry
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}

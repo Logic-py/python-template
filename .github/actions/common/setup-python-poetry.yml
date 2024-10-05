@@ -1,0 +1,31 @@
+name: 'Setup Python and Poetry'
+description: 'Check out code, set up Python, and install Poetry'
+
+inputs:
+  python-version:
+    description: 'Python version to set up'
+    required: true
+    default: '3.12'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Restore Poetry Cache
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.cache/pypoetry
+          ~/.poetry
+        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install Poetry
+      run: |
+        pip install poetry
