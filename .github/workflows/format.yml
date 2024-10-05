@@ -8,12 +8,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Call Setup Workflow
-        uses: setup.yml
-
       - name: Run Ruff Formatting
         run: |
           poetry run ruff format --config pyproject.toml src/
