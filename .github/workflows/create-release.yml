@@ -1,0 +1,83 @@
+name: Create Release
+
+on:
+  workflow_call: # Allows this workflow to be called by other workflows
+
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'  # Only run on main branch
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history
+          ref: main  # Explicitly checkout main branch
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Read version from pyproject.toml
+        id: get_version
+        run: |
+          VERSION=$(poetry version --short)
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Check if release exists
+        id: check_release
+        run: |
+          RELEASE_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ env.VERSION }})
+          if [ "$RELEASE_EXISTS" == "404" ]; then
+            echo "CREATE_RELEASE=true" >> $GITHUB_ENV
+          else
+            echo "CREATE_RELEASE=false" >> $GITHUB_ENV
+          fi
+
+      - name: Find Previous Release
+        if: env.CREATE_RELEASE == 'true'
+        id: previous_release
+        run: |
+          git fetch --tags
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
+          fi
+
+      - name: Generate Compare URL
+        if: env.CREATE_RELEASE == 'true'
+        id: compare_url
+        run: |
+          if [ -n "${{ env.PREV_TAG }}" ]; then
+            echo "URL=${{ github.server_url }}/${{ github.repository }}/compare/${{ env.PREV_TAG }}...${{ env.VERSION }}" >> $GITHUB_ENV
+          else
+            echo "URL=${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.VERSION }}" >> $GITHUB_ENV
+          fi
+
+      - name: Debug Release Notes
+        if: env.CREATE_RELEASE == 'true'
+        run: |
+          echo "Release Notes Body:"
+          echo "${{ steps.release_notes.outputs.body }}"
+          echo "${{ steps.release_notes }}"
+          echo "${{ steps.release_notes.outputs }}"
+
+      - name: Create Release
+        if: env.CREATE_RELEASE == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: ${{ env.VERSION }}
+          body: |
+            **Full Changelog**: ${{ env.URL }}
+          draft: false
+          prerelease: false
+          target_commitish: main  # Explicitly use main branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

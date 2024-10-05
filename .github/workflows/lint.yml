@@ -1,0 +1,29 @@
+name: Lint
+
+on:
+  workflow_call: # Allows this workflow to be called by other workflows
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    needs: format  # Dependency on format job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore Poetry Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.poetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Install Poetry
+        run: |
+          pip install poetry
+
+      - name: Run Ruff Linting
+        run: |
+          poetry run ruff check --config pyproject.toml src/
