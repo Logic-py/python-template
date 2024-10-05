@@ -20,6 +20,6 @@ jobs:
     uses: ./.github/workflows/test.yml
 
   create_release:
-    uses: ./.github/workflows/create_release.yml
+    uses: ./.github/workflows/create-release.yml
     needs: [ format, lint, type-check, test ]  # Run after all checks
     if: github.ref == 'refs/heads/main'
