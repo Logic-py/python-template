@@ -1,0 +1,70 @@
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+    commit-matcher:
+      - '/^feat:/i'
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+    commit-matcher:
+      - '/^fix:/i'
+  - title: '📚 Documentation'
+    labels:
+      - 'documentation'
+    commit-matcher:
+      - '/^docs:/i'
+  - title: '🧰 Maintenance'
+    labels:
+      - 'chore'
+      - 'maintenance'
+    commit-matcher:
+      - '/^chore:/i'
+      - '/^refactor:/i'
+  - title: '🔧 Other Changes'
+    labels:
+      - 'other'
+    commit-matcher:
+      - '/.+/'  # Catch all for any commits that don't match above
+
+change-template: '- $TITLE @$AUTHOR ($COMMIT)'
+
+sort-by: 'title'
+sort-direction: 'ascending'
+
+template: |
+  ## What's Changed
+  $CHANGES
+  
+  ## 👥 Contributors
+  $CONTRIBUTORS
+  
+  **Full Changelog1**: $COMPARE_URL
+
+exclude-labels:
+  - 'skip-changelog'
+
+include-labels:
+  - '*'
+
+references:
+  - main
+  - master
+  - production
+
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
