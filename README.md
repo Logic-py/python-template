@@ -5,7 +5,7 @@
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/logic-py/python-template)
 
 This is a template project for Python, designed to streamline the creation of Python projects using (What I think are)
-best practices.
+best practices. 
 
 ## Table of Contents
 
