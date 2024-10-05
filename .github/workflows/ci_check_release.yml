@@ -159,6 +159,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for generating release notes
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -183,21 +185,34 @@ jobs:
           VERSION=$(poetry version --short)
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
-      #      - name: Generate Release Notes
-      #        id: release_notes
-      #        uses: release-drafter/release-drafter@v6
-      #        with:
-      #          publish: true
-      #          config-name: release-drafter.yml
-      #          version: ${{ env.VERSION }}
-      #        env:
-      #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if release exists
+        id: check_release
+        run: |
+          RELEASE_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ env.VERSION }})
+          if [ "$RELEASE_EXISTS" == "404" ]; then
+            echo "CREATE_RELEASE=true" >> $GITHUB_ENV
+          else
+            echo "CREATE_RELEASE=false" >> $GITHUB_ENV
+          fi
+
+      - name: Generate Release Notes
+        if: env.CREATE_RELEASE == 'true'
+        id: release_notes
+        uses: release-drafter/release-drafter@v5
+        with:
+          config-name: .github/release-drafter.yml
+          version: ${{ env.VERSION }}
+          tag: ${{ env.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
+        if: env.CREATE_RELEASE == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.VERSION }}
-          body: ${{ steps.release_notes.outputs.release_notes }}
+          name: Release ${{ env.VERSION }}
+          body: ${{ steps.release_notes.outputs.body }}
           draft: false
           prerelease: false
         env:

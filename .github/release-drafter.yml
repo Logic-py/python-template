@@ -3,29 +3,54 @@ tag-template: '$RESOLVED_VERSION'
 categories:
   - title: '🚀 Features'
     labels:
-      - feat
-      - feature
-      - Feature
+      - 'feature'
+      - 'enhancement'
+    commit-matcher:
+      - '/^feat:/'
   - title: '🐛 Bug Fixes'
-    label: 'fix'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+    commit-matcher:
+      - '/^fix:/'
   - title: '📚 Documentation'
-    label: 'docs'
-  - title: '🛠️ Refactoring'
-    label: 'refactor'
-  - title: '⚡️ Performance Improvements'
-    label: 'perf'
-  - title: '🧪 Tests'
-    label: 'test'
-  - title: '🔧 Build System'
-    labels: 'build'
-  - title: '👷 Continuous Integration'
-    label: 'ci'
+    labels:
+      - 'documentation'
+    commit-matcher:
+      - '/^docs:/'
   - title: '🧰 Maintenance'
-    label: 'chore'
+    labels:
+      - 'chore'
+      - 'maintenance'
+    commit-matcher:
+      - '/^chore:/'
+      - '/^refactor:/'
+  - title: '🔧 Other Changes'
+    labels:
+      - 'other'
+    commit-matcher:
+      - '/^style:/'
+      - '/^test:/'
+      - '/^ci:/'
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+
 template: |
   ## What's Changed
   $CHANGES
 
-  **Full Changelog**: $COMPARE_URL
+  ## 👥 Contributors
+  $CONTRIBUTORS
