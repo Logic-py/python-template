@@ -160,20 +160,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch all history for generating release notes
+          fetch-depth: 0  # Fetch all history
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
-      - name: Restore Poetry Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/pypoetry
-            ~/.poetry
-          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
 
       - name: Install Poetry
         run: |
@@ -203,16 +195,39 @@ jobs:
           config-name: release-drafter.yml
           version: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
+          disable-releaser: true  # Prevent creating a draft release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Find Previous Release
+        if: env.CREATE_RELEASE == 'true'
+        id: previous_release
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
+          fi
+
+      - name: Generate Compare URL
+        if: env.CREATE_RELEASE == 'true'
+        id: compare_url
+        run: |
+          if [ -n "${{ env.PREV_TAG }}" ]; then
+            echo "URL=${{ github.server_url }}/${{ github.repository }}/compare/${{ env.PREV_TAG }}...${{ env.VERSION }}" >> $GITHUB_ENV
+          else
+            echo "URL=${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.VERSION }}" >> $GITHUB_ENV
+          fi
 
       - name: Create Release
         if: env.CREATE_RELEASE == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.VERSION }}
-          name: ${{ env.VERSION }}
-          body: ${{ steps.release_notes.outputs.body }}
+          name: Release ${{ env.VERSION }}
+          body: |
+            ${{ steps.release_notes.outputs.body }}
+            
+            **Full Changelog**: ${{ env.URL }}
           draft: false
           prerelease: false
         env:
