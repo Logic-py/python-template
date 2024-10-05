@@ -6,44 +6,56 @@ categories:
       - 'feature'
       - 'enhancement'
     commit-matcher:
-      - '/^feat:/'
+      - '/^feat:/i'
   - title: '🐛 Bug Fixes'
     labels:
       - 'fix'
       - 'bugfix'
       - 'bug'
     commit-matcher:
-      - '/^fix:/'
+      - '/^fix:/i'
   - title: '📚 Documentation'
     labels:
       - 'documentation'
     commit-matcher:
-      - '/^docs:/'
+      - '/^docs:/i'
   - title: '🧰 Maintenance'
     labels:
       - 'chore'
       - 'maintenance'
     commit-matcher:
-      - '/^chore:/'
-      - '/^refactor:/'
-  - title: 'Other'
+      - '/^chore:/i'
+      - '/^refactor:/i'
+  - title: '🔧 Other Changes'
+    labels:
+      - 'other'
     commit-matcher:
-      - '/.+/'
+      - '/.+/'  # Catch all for any commits that don't match above
 
-change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
-change-title-escapes: '\<*_&'
+change-template: '- $TITLE @$AUTHOR ($COMMIT)'
+
+sort-by: 'title'
+sort-direction: 'ascending'
+
+template: |
+  ## What's Changed
+  $CHANGES
+  
+  ## 👥 Contributors
+  $CONTRIBUTORS
+  
+  **Full Changelog**: $COMPARE_URL
+
+exclude-labels:
+  - 'skip-changelog'
 
 include-labels:
-  - 'feature'
-  - 'enhancement'
-  - 'fix'
-  - 'bugfix'
-  - 'bug'
-  - 'documentation'
-  - 'maintenance'
+  - '*'
 
-include-commits: true
-include-pull-requests: true
+references:
+  - main
+  - master
+  - production
 
 version-resolver:
   major:
@@ -56,10 +68,3 @@ version-resolver:
     labels:
       - 'patch'
   default: patch
-
-template: |
-  ## What's Changed
-  $CHANGES
-  
-  ## 👥 Contributors
-  $CONTRIBUTORS
