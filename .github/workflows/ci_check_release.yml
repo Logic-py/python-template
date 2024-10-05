@@ -187,7 +187,7 @@ jobs:
         id: release_notes
         uses: release-drafter/release-drafter@v6
         with:
-          config-name: .github/release-drafter.yml
+          config-name: release-drafter.yml
           version: ${{ env.VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
