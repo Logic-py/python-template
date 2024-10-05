@@ -206,25 +206,10 @@ jobs:
           config-name: .github/release-drafter.yml  # Update this path
           version: ${{ env.VERSION }}
           tag: ${{ env.VERSION }}
-          disable-releaser: true
+          disable-releaser: false
           commitish: main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Debug step to verify configuration loading
-      - name: Debug Release Drafter
-        if: env.CREATE_RELEASE == 'true'
-        run: |
-          echo "Configuration path: .github/release-drafter.yml"
-          if [ -f ".github/release-drafter.yml" ]; then
-            echo "Configuration file exists"
-            cat .github/release-drafter.yml
-          else
-            echo "Configuration file not found"
-            find . -name "release-drafter.yml"
-          fi
-          echo "Release Notes Body:"
-          echo "${{ steps.release_notes.outputs.body }}"
 
       - name: Generate Compare URL
         if: env.CREATE_RELEASE == 'true'
