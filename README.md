@@ -67,6 +67,9 @@ GitHub Actions to run the following jobs:
 
 The main CI workflow is defined in `.github/workflows/main.yml`.
 
+> **Note:** This workflow will only create a release tag based on your `pyproject.toml` version number. If the version
+> has not been bumped, it will not create a new release.
+
 ## Dependencies
 
 This project includes the following dependencies:
