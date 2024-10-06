@@ -1,14 +1,15 @@
 name: Create Release
 
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_run:
+    workflows: [ "CI and Release" ]  # Ensure this matches the name of your main workflow
+    types:
+      - completed
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v4
         with:
