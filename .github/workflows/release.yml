@@ -1,8 +1,8 @@
-name: Create Release
+name: 'Create Release'
 
 on:
   workflow_run:
-    workflows: [ "CI and Release" ]  # Ensure this matches the name of your main workflow
+    workflows: [ 'CI and Release' ]  # Ensure this matches the name of your main workflow
     types:
       - completed
 

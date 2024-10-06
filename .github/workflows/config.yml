@@ -1,4 +1,4 @@
-name: Shared Configuration
+name: 'Shared Configuration'
 
 on:
   workflow_call:
