@@ -81,7 +81,7 @@ This project includes the following dependencies:
 - **Development Dependencies**:
     - `ruff`: ^0.6.9 (for code linting and formatting)
     - `mypy`: ^1.11.2 (for type checking)
-    - `pre-commit`: ^3.8.0 (for managing Git hooks)
+    - `pre-commit`: ^4.0.0 (for managing Git hooks)
     - `pytest`: ^7.2.0 (for unit testing)
 
 ### Optional: Pyenv
