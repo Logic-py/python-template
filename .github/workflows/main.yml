@@ -7,26 +7,64 @@ on:
   pull_request:
 
 jobs:
+  config:
+    uses: ./.github/workflows/config.yml
+
   setup:
-    uses: ./.github/workflows/setup.yml
+    needs: config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ needs.config.outputs.python-version }}
 
   format:
-    needs: setup
-    uses: ./.github/workflows/format.yml
+    needs: [ config, setup ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ needs.config.outputs.python-version }}
+      - uses: ./.github/actions/code-quality
+        with:
+          check-type: 'format'
+          source-dir: ${{ needs.config.outputs.source-dir }}
 
   lint:
-    needs: format
-    uses: ./.github/workflows/lint.yml
+    needs: [ config, format ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ needs.config.outputs.python-version }}
+      - uses: ./.github/actions/code-quality
+        with:
+          check-type: 'lint'
+          source-dir: ${{ needs.config.outputs.source-dir }}
 
   type-check:
-    needs: format
-    uses: ./.github/workflows/type-check.yml
+    needs: [ config, format ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ needs.config.outputs.python-version }}
+      - uses: ./.github/actions/code-quality
+        with:
+          check-type: 'type-check'
+          source-dir: ${{ needs.config.outputs.source-dir }}
 
   test:
-    needs: setup
-    uses: ./.github/workflows/test.yml
-
-  create_release:
-    if: github.ref == 'refs/heads/main'
-    needs: [ lint, type-check, test ]
-    uses: ./.github/workflows/release.yml
+    needs: [ config, setup ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ needs.config.outputs.python-version }}
+      - name: Run Tests
+        run: poetry run pytest
