@@ -136,4 +136,9 @@ jobs:
           body: |
             ${{ env.CHANGELOG }}
             
-            **Full Changelog**:
+            **Full Changelog**: ${{ env.URL }}
+          draft: false
+          prerelease: false
+          target_commitish: main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
