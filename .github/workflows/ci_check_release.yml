@@ -225,7 +225,8 @@ jobs:
             git log --pretty=format:"* %s (%h)" --reverse | while read -r line; do
               echo "* ${line}" >> $GITHUB_ENV
             done
-            echo "
+            echo "EOF" >> $GITHUB_ENV
+          fi
 
       - name: Debug Release Notes
         if: env.CREATE_RELEASE == 'true'
