@@ -1,6 +1,6 @@
 # Python Template
 
-![Build Status](https://github.com/logic-py/python-template/actions/workflows/ci_check_release.yml/badge.svg)
+![Build Status](https://github.com/logic-py/python-template/actions/workflows/main.yml/badge.svg)
 ![License](https://img.shields.io/github/license/logic-py/python-template.svg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/logic-py/python-template)
 
