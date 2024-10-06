@@ -212,29 +212,17 @@ jobs:
         if: env.CREATE_RELEASE == 'true'
         id: changelog
         run: |
+          # Make the script executable
+          chmod +x ./generate_changelog.sh
+          
+          # Generate the changelog and store it in the GITHUB_ENV
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           if [ -n "${{ env.PREV_TAG }}" ]; then
-            echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-            echo "## What's Changed" >> $GITHUB_ENV
-            git log ${{ env.PREV_TAG }}..HEAD --pretty=format:"* %s (%h)" --reverse | while read -r line; do
-              echo "* ${line}" >> $GITHUB_ENV
-            done
-            echo "EOF" >> $GITHUB_ENV
+            ./generate_changelog.sh "${{ env.PREV_TAG }}" >> $GITHUB_ENV
           else
-            echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-            echo "## What's Changed" >> $GITHUB_ENV
-            git log --pretty=format:"* %s (%h)" --reverse | while read -r line; do
-              echo "* ${line}" >> $GITHUB_ENV
-            done
-            echo "EOF" >> $GITHUB_ENV
+            ./generate_changelog.sh >> $GITHUB_ENV
           fi
-
-      - name: Debug Release Notes
-        if: env.CREATE_RELEASE == 'true'
-        run: |
-          echo "Release Notes Body:"
-          echo "${{ steps.release_notes.outputs.body }}"
-          echo "${{ steps.release_notes }}"
-          echo "${{ steps.release_notes.outputs }}"
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Create Release
         if: env.CREATE_RELEASE == 'true'
