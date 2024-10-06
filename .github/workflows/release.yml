@@ -6,7 +6,6 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    #    needs: [ lint, type-check, test ]  # Ensure lint, type-check, and test jobs have succeeded
     if: github.ref == 'refs/heads/main'  # Only run on main branch
 
     steps:

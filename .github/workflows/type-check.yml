@@ -6,8 +6,6 @@ on:
 jobs:
   type-check:
     runs-on: ubuntu-latest
-    needs: format  # Dependency on format job
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
