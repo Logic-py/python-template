@@ -9,9 +9,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    file-extensions:
-      - "toml"
-      - "lock"
     open-pull-requests-limit: 10
     labels:
       - "dependencies"
