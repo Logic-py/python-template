@@ -68,3 +68,71 @@ jobs:
           python-version: ${{ needs.config.outputs.python-version }}
       - name: Run Tests
         run: poetry run pytest
+
+  release:
+    needs: [ config, setup, format, lint, type-check, test ]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup-env
+        with:
+          python-version: ${{ needs.config.outputs.python-version }}
+
+      - name: Read version from pyproject.toml
+        id: get_version
+        run: |
+          VERSION=$(poetry version --short)
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+
+      - name: Check if release exists
+        run: |
+          RELEASE_EXISTS=$(curl -s -o /dev/null -w "%{http_code}" https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ env.VERSION }})
+          if [ "$RELEASE_EXISTS" == "404" ]; then
+            echo "CREATE_RELEASE=true" >> $GITHUB_ENV
+          else
+            echo "CREATE_RELEASE=false" >> $GITHUB_ENV
+
+      - name: Find Previous Release
+        if: env.CREATE_RELEASE == 'true'
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+          if [ -n "$PREV_TAG" ]; then
+            echo "PREV_TAG=${PREV_TAG}" >> $GITHUB_ENV
+          fi
+
+      - name: Generate Compare URL
+        if: env.CREATE_RELEASE == 'true'
+        run: |
+          if [ -n "${{ env.PREV_TAG }}" ]; then
+            echo "URL=${{ github.server_url }}/${{ github.repository }}/compare/${{ env.PREV_TAG }}...${{ env.VERSION }}" >> $GITHUB_ENV
+          else
+            echo "URL=${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.VERSION }}" >> $GITHUB_ENV
+          fi
+
+      - name: Generate Changelog
+        if: env.CREATE_RELEASE == 'true'
+        run: |
+          chmod +x .github/generate_changelog.sh
+          source .github/generate_changelog.sh
+          
+          echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+          if [ -n "${{ env.PREV_TAG }}" ]; then
+            generate_categorized_changelog "${{ env.PREV_TAG }}" >> $GITHUB_ENV
+          else
+            generate_categorized_changelog >> $GITHUB_ENV
+          fi
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Create Release
+        if: env.CREATE_RELEASE == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: ${{ env.VERSION }}
+          body: |
+            ${{ env.CHANGELOG }}
+            
+            **Full Changelog**:
