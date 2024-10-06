@@ -65,7 +65,7 @@ GitHub Actions to run the following jobs:
 
 ### Workflow File
 
-The CI workflow is defined in `.github/workflows/ci_check_release.yml`.
+The main CI workflow is defined in `.github/workflows/main.yml`.
 
 ## Dependencies
 
