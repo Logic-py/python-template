@@ -1,8 +1,6 @@
 #!/bin/bash
 
-echo "inside the script"
 generate_categorized_changelog() {
-  echo "testing"
   local previous_tag="$1"
   local git_log_command
 
