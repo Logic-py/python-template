@@ -12,25 +12,30 @@ generate_categorized_changelog() {
 
   echo "## What's Changed"
 
+  # Store all commits in a temporary file
+  all_commits=$(mktemp)
+  $git_log_command --pretty=format:"* %s (%h)" --reverse > "$all_commits"
+
   # Features
   echo "### 🚀 Features"
-  $git_log_command --pretty=format:"* %s (%h)" --reverse | grep "^* feat" || true
+  grep -i "^* feat:" "$all_commits" || true
 
   # Bug Fixes
   echo -e "\n### 🐛 Bug Fixes"
-  $git_log_command --pretty=format:"* %s (%h)" --reverse | grep "^* fix" || true
+  grep -i "^* fix:" "$all_commits" || true
 
   # Documentation
   echo -e "\n### 📚 Documentation"
-  $git_log_command --pretty=format:"* %s (%h)" --reverse | grep "^* docs" || true
+  grep -i "^* docs:" "$all_commits" || true
 
   # Other Changes
   echo -e "\n### 🔧 Other Changes"
-  $git_log_command --pretty=format:"* %s (%h)" --reverse | grep -v "^* feat\|^* fix\|^* docs" || true
+  grep -i -v "^* feat:\|^* fix:\|^* docs:" "$all_commits" || true
+
+  # Cleanup
+  rm "$all_commits"
 }
 
-# Usage in workflow:
-# CHANGELOG=$(generate_categorized_changelog "$PREVIOUS_TAG")
-# echo "CHANGELOG<<EOF" >> $GITHUB_ENV
-# echo "$CHANGELOG" >> $GITHUB_ENV
-# echo "EOF" >> $GITHUB_ENV
+# Usage example:
+# changelog=$(generate_categorized_changelog "v1.0.0")
+# echo "$changelog"

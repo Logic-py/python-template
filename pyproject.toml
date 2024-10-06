@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-template"
-version = "0.5.28"
+version = "0.5.29"
 description = "Used to templatize python projects."
 authors = ["Loïc Motheu <lmotheu@gmail.com>"]
 readme = "README.md"
