@@ -13,3 +13,20 @@ jobs:
   format:
     needs: setup
     uses: ./.github/workflows/format.yml
+
+  lint:
+    needs: format
+    uses: ./.github/workflows/lint.yml
+
+  type-check:
+    needs: format
+    uses: ./.github/workflows/type-check.yml
+
+  test:
+    needs: setup
+    uses: ./.github/workflows/test.yml
+
+  create_release:
+    if: github.ref == 'refs/heads/main'
+    needs: [ lint, type-check, test ]
+    uses: ./.github/workflows/release.yml
