@@ -1,0 +1,29 @@
+name: 'Code Quality Checks'
+description: 'Runs formatting, linting, and type checking'
+
+inputs:
+  check-type:
+    description: 'Type of check to run (format, lint, or type-check)'
+    required: true
+  source-dir:
+    description: 'Source directory to check'
+    required: false
+    default: 'src/'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run Ruff Formatting
+      if: inputs.check-type == 'format'
+      shell: bash
+      run: poetry run ruff format --config pyproject.toml ${{ inputs.source-dir }}
+
+    - name: Run Ruff Linting
+      if: inputs.check-type == 'lint'
+      shell: bash
+      run: poetry run ruff check --config pyproject.toml ${{ inputs.source-dir }}
+
+    - name: Run Mypy Type Checking
+      if: inputs.check-type == 'type-check'
+      shell: bash
+      run: poetry run mypy --config-file pyproject.toml ${{ inputs.source-dir }}
