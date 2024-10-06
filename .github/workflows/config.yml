@@ -1,0 +1,28 @@
+name: Shared Configuration
+
+on:
+  workflow_call:
+    outputs:
+      python-version:
+        description: "Python version to use"
+        value: '3.12'
+      poetry-cache-path:
+        description: "Poetry cache paths"
+        value: |
+          ~/.cache/pypoetry
+          ~/.poetry
+      source-dir:
+        description: "Source directory to check"
+        value: 'src/'
+
+jobs:
+  config:
+    runs-on: ubuntu-latest
+    outputs:
+      python-version: '3.12'
+      poetry-cache-path: |
+        ~/.cache/pypoetry
+        ~/.poetry
+      source-dir: 'src/'
+    steps:
+      - run: echo "Shared configuration loaded"
