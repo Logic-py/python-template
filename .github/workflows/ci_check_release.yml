@@ -213,17 +213,15 @@ jobs:
         id: changelog
         run: |
           # Make the script executable
-          pwd
-          ls
-          echo pwd
           chmod +x .github/generate_changelog.sh
+          source .github/generate_changelog.sh
           
           # Generate the changelog and store it in the GITHUB_ENV
           echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           if [ -n "${{ env.PREV_TAG }}" ]; then
-            .github/generate_changelog.sh "${{ env.PREV_TAG }}" >> $GITHUB_ENV
+            generate_categorized_changelog "${{ env.PREV_TAG }}" >> $GITHUB_ENV
           else
-            .github/generate_changelog.sh >> $GITHUB_ENV
+            generate_categorized_changelog >> $GITHUB_ENV
           fi
           echo "EOF" >> $GITHUB_ENV
 
