@@ -208,6 +208,25 @@ jobs:
             echo "URL=${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ env.VERSION }}" >> $GITHUB_ENV
           fi
 
+      - name: Generate Changelog
+        if: env.CREATE_RELEASE == 'true'
+        id: changelog
+        run: |
+          if [ -n "${{ env.PREV_TAG }}" ]; then
+            echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+            echo "## What's Changed" >> $GITHUB_ENV
+            git log ${{ env.PREV_TAG }}..HEAD --pretty=format:"* %s (%h)" --reverse | while read -r line; do
+              echo "* ${line}" >> $GITHUB_ENV
+            done
+            echo "EOF" >> $GITHUB_ENV
+          else
+            echo "CHANGELOG<<EOF" >> $GITHUB_ENV
+            echo "## What's Changed" >> $GITHUB_ENV
+            git log --pretty=format:"* %s (%h)" --reverse | while read -r line; do
+              echo "* ${line}" >> $GITHUB_ENV
+            done
+            echo "
+
       - name: Debug Release Notes
         if: env.CREATE_RELEASE == 'true'
         run: |
@@ -223,6 +242,7 @@ jobs:
           tag_name: ${{ env.VERSION }}
           name: ${{ env.VERSION }}
           body: |
+            ${{ env.CHANGELOG }}
             **Full Changelog**: ${{ env.URL }}
           draft: false
           prerelease: false
