@@ -94,6 +94,7 @@ jobs:
             echo "CREATE_RELEASE=true" >> $GITHUB_ENV
           else
             echo "CREATE_RELEASE=false" >> $GITHUB_ENV
+          fi
 
       - name: Find Previous Release
         if: env.CREATE_RELEASE == 'true'
