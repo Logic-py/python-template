@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-template"
-version = "0.6.2"
+version = "0.6.3"
 description = "Used to templatize python projects."
 authors = ["Loïc Motheu <lmotheu@gmail.com>"]
 readme = "README.md"
@@ -11,10 +11,10 @@ python = "^3.12"
 loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.11.2"
-pre-commit = "^4.0.0"
+mypy = "^1.13.0"
+pre-commit = "^4.0.1"
 pytest = "^8.3.3"
-ruff = "^0.6.9"
+ruff = "^0.7.1"
 
 [tool.ruff]
 src = ["src"]
