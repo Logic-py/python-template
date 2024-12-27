@@ -1,14 +1,14 @@
-name: 'Code Quality Checks'
-description: 'Runs formatting, linting, and type checking'
+name: "Code Quality Checks"
+description: "Runs formatting, linting, and type checking"
 
 inputs:
   check-type:
-    description: 'Type of check to run (format, lint, or type-check)'
+    description: "Type of check to run (format, lint, or type-check)"
     required: true
   source-dir:
-    description: 'Source directory to check'
+    description: "Source directory to check"
     required: false
-    default: 'src/'
+    default: "src/"
 
 runs:
   using: "composite"

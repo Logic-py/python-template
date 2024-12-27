@@ -39,7 +39,7 @@ Follow these steps to get started with this template:
    ```bash
    pip install poetry
    ```
-   > **Note:** This template is set up using Poetry version 1.8.3.
+   > **Note:** This template is set up using Poetry version 1.8.5.
 
 3. **Install dependencies:**
 
@@ -76,13 +76,13 @@ This project includes the following dependencies:
 
 - **Core Dependencies**:
     - `python`: ^3.12 (switch the `.python-version` file to your liking)
-    - `loguru`: ^0.7.2 (useful logging package)
+    - `loguru`: ^0.7.3 (useful logging package)
 
 - **Development Dependencies**:
-    - `ruff`: ^0.6.9 (for code linting and formatting)
-    - `mypy`: ^1.11.2 (for type checking)
-    - `pre-commit`: ^4.0.0 (for managing Git hooks)
-    - `pytest`: ^7.2.0 (for unit testing)
+    - `ruff`: ^0.8.x (for code linting and formatting)
+    - `mypy`: ^1.x.y (for type checking)
+    - `pre-commit`: ^4.x.y (for managing Git hooks)
+    - `pytest`: ^8.x.y (for unit testing)
 
 ### Optional: Pyenv
 
@@ -104,7 +104,7 @@ pyenv install --list
 Download & install a specific Python version:
 
 ```bash
-pyenv install 3.12.7
+pyenv install 3.12.8
 ```
 
 List the global Python version set by your system:
@@ -122,13 +122,13 @@ pyenv local
 Set the global Python version for your system:
 
 ```bash
-pyenv global 3.12.7
+pyenv global 3.12.8
 ```
 
 Set the local Python version for your project:
 
 ```bash
-pyenv local 3.12.7
+pyenv local 3.12.8
 ```
 
 Feel free to utilize Pyenv and modify the `.python-version` file to your preference.
