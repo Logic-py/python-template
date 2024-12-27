@@ -1,14 +1,6 @@
 """Public module example."""
 
-from typing import Optional
-
 from loguru import logger
-
-
-def a_new_method() -> None:
-    print("example!")
-    a: Optional[str] = None
-    example(data=a)
 
 
 def example(data: str) -> None:
