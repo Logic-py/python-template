@@ -14,7 +14,6 @@ repos:
         entry: poetry run ruff format
         language: python
         types_or: [ python, pyi, jupyter ]
-        args: [ "--config", "pyproject.toml", "src/" ]
         pass_filenames: true
 
       - id: ruff-lint
@@ -22,7 +21,6 @@ repos:
         entry: poetry run ruff check
         language: python
         types_or: [ python, pyi, jupyter ]
-        args: [ "--config", "pyproject.toml", "src/" ]
         pass_filenames: true
         exclude: tests
 
@@ -31,5 +29,4 @@ repos:
         entry: poetry run mypy
         language: python
         types_or: [ python, pyi, jupyter ]
-        args: [ "--config", "pyproject.toml", "src/" ]
         pass_filenames: true
