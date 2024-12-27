@@ -104,7 +104,7 @@ pyenv install --list
 Download & install a specific Python version:
 
 ```bash
-pyenv install 3.12.7
+pyenv install 3.12.8
 ```
 
 List the global Python version set by your system:
@@ -122,13 +122,13 @@ pyenv local
 Set the global Python version for your system:
 
 ```bash
-pyenv global 3.12.7
+pyenv global 3.12.8
 ```
 
 Set the local Python version for your project:
 
 ```bash
-pyenv local 3.12.7
+pyenv local 3.12.8
 ```
 
 Feel free to utilize Pyenv and modify the `.python-version` file to your preference.
