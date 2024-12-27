@@ -39,7 +39,7 @@ Follow these steps to get started with this template:
    ```bash
    pip install poetry
    ```
-   > **Note:** This template is set up using Poetry version 1.8.3.
+   > **Note:** This template is set up using Poetry version 1.8.5.
 
 3. **Install dependencies:**
 
@@ -76,13 +76,13 @@ This project includes the following dependencies:
 
 - **Core Dependencies**:
     - `python`: ^3.12 (switch the `.python-version` file to your liking)
-    - `loguru`: ^0.7.2 (useful logging package)
+    - `loguru`: ^0.7.3 (useful logging package)
 
 - **Development Dependencies**:
-    - `ruff`: ^0.6.9 (for code linting and formatting)
-    - `mypy`: ^1.11.2 (for type checking)
-    - `pre-commit`: ^4.0.0 (for managing Git hooks)
-    - `pytest`: ^7.2.0 (for unit testing)
+    - `ruff`: ^0.8.x (for code linting and formatting)
+    - `mypy`: ^1.x.y (for type checking)
+    - `pre-commit`: ^4.x.y (for managing Git hooks)
+    - `pytest`: ^8.x.y (for unit testing)
 
 ### Optional: Pyenv
 
