@@ -29,7 +29,7 @@ runs:
         path: |
           ~/.cache/pypoetry
           ~/.poetry
-        key: ${{ runner.os }}-poetry-${{ hashFiles("**/poetry.lock") }}${{ inputs.cache-key-suffix }}
+        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}${{ inputs.cache-key-suffix }}
 
     - name: Install dependencies
       shell: bash
