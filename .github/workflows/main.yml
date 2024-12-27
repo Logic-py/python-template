@@ -71,7 +71,7 @@ jobs:
 
   release:
     needs: [ config, setup, format, lint, type-check, test ]
-    if: github.ref == "refs/heads/main"
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
