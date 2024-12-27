@@ -97,7 +97,7 @@ jobs:
           fi
 
       - name: Find Previous Release
-        if: env.CREATE_RELEASE == "true"
+        if: env.CREATE_RELEASE == 'true'
         run: |
           PREV_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
           if [ -n "$PREV_TAG" ]; then
@@ -105,7 +105,7 @@ jobs:
           fi
 
       - name: Generate Compare URL
-        if: env.CREATE_RELEASE == "true"
+        if: env.CREATE_RELEASE == 'true'
         run: |
           if [ -n "${{ env.PREV_TAG }}" ]; then
             echo "URL=${{ github.server_url }}/${{ github.repository }}/compare/${{ env.PREV_TAG }}...${{ env.VERSION }}" >> $GITHUB_ENV
@@ -114,7 +114,7 @@ jobs:
           fi
 
       - name: Generate Changelog
-        if: env.CREATE_RELEASE == "true"
+        if: env.CREATE_RELEASE == 'true'
         run: |
           chmod +x .github/generate_changelog.sh
           source .github/generate_changelog.sh
@@ -128,7 +128,7 @@ jobs:
           echo "EOF" >> $GITHUB_ENV
 
       - name: Create Release
-        if: env.CREATE_RELEASE == "true"
+        if: env.CREATE_RELEASE == 'true'
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ env.VERSION }}
