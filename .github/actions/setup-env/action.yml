@@ -1,15 +1,15 @@
-name: 'Setup Environment'
-description: 'Sets up Python, Poetry, and dependencies with caching'
+name: "Setup Environment"
+description: "Sets up Python, Poetry, and dependencies with caching"
 
 inputs:
   python-version:
-    description: 'Python version to use'
+    description: "Python version to use"
     required: false
-    default: '3.12'
+    default: "3.12"
   cache-key-suffix:
-    description: 'Additional suffix for cache key'
+    description: "Additional suffix for cache key"
     required: false
-    default: ''
+    default: ""
 
 runs:
   using: "composite"
@@ -29,7 +29,7 @@ runs:
         path: |
           ~/.cache/pypoetry
           ~/.poetry
-        key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}${{ inputs.cache-key-suffix }}
+        key: ${{ runner.os }}-poetry-${{ hashFiles("**/poetry.lock") }}${{ inputs.cache-key-suffix }}
 
     - name: Install dependencies
       shell: bash
