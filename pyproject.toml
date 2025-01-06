@@ -14,7 +14,7 @@ loguru = "^0.7.3"
 mypy = "^1.14.1"
 pre-commit = "^4.0.1"
 pytest = "^8.3.4"
-ruff = "^0.8.5"
+ruff = "^0.8.6"
 
 [tool.ruff]
 src = ["src"]
