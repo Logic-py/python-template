@@ -1,14 +1,16 @@
 [project]
 name = "python-template"
-version = "0.8.0"
+version = "0.8.1"
 description = "Used to templatize python projects."
 authors = [{ name = "Loïc Motheu", email = "lmotheu@gmail.com" }]
 readme = "README.md"
 requires-python = ">=3.13,<4.0"
-package-mode = false
 dependencies = [
     "loguru (>=0.7.3,<0.8.0)"
 ]
+
+[tool.poetry]
+package-mode = false
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.15.0"
