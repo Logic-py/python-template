@@ -75,7 +75,7 @@ The main CI workflow is defined in `.github/workflows/main.yml`.
 This project includes the following dependencies:
 
 - **Core Dependencies**:
-    - `python`: ^3.12 (switch the `.python-version` file to your liking)
+    - `python`: ^3.13 (switch the `.python-version` file to your liking)
     - `loguru`: ^0.7.3 (useful logging package)
 
 - **Development Dependencies**:
@@ -104,7 +104,7 @@ pyenv install --list
 Download & install a specific Python version:
 
 ```bash
-pyenv install 3.12.8
+pyenv install 3.13.3
 ```
 
 List the global Python version set by your system:
@@ -122,13 +122,13 @@ pyenv local
 Set the global Python version for your system:
 
 ```bash
-pyenv global 3.12.8
+pyenv global 3.13.3
 ```
 
 Set the local Python version for your project:
 
 ```bash
-pyenv local 3.12.8
+pyenv local 3.13.3
 ```
 
 Feel free to utilize Pyenv and modify the `.python-version` file to your preference.
