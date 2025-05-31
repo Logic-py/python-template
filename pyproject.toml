@@ -1,6 +1,6 @@
 [project]
 name = "python-template"
-version = "0.8.2"
+version = "0.8.3"
 description = "Used to templatize python projects."
 authors = [{ name = "Loïc Motheu", email = "lmotheu@gmail.com" }]
 readme = "README.md"
@@ -13,30 +13,30 @@ dependencies = [
 package-mode = false
 
 [tool.poetry.group.dev.dependencies]
-mypy = "^1.15.0"
+mypy = "^1.16.0"
 pre-commit = "^4.2.0"
 pytest = "^8.3.5"
-ruff = "^0.11.11"
+ruff = "^0.11.12"
 
-[project.ruff]
+[tool.ruff]
 src = ["src"]
 line-length = 120
 indent-width = 4
 
-[project.ruff.format]
+[tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 skip-magic-trailing-comma = false
 line-ending = "auto"
 
-[project.ruff.lint]
+[tool.ruff.lint]
 select = ["ALL"]
 ignore = ["D203", "COM812", "ISC001", "D213", "FA102"]
 fixable = ["ALL"]
 unfixable = []
 exclude = ["tests/*"]
 
-[project.mypy]
+[tool.mypy]
 exclude = "tests/*"
 
 [build-system]
