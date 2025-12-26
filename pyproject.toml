@@ -1,6 +1,6 @@
 [project]
 name = "python-template"
-version = "0.8.3"
+version = "0.9.0"
 description = "Used to templatize python projects."
 authors = [{ name = "Loïc Motheu", email = "lmotheu@gmail.com" }]
 readme = "README.md"
