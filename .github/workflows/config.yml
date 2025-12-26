@@ -5,7 +5,7 @@ on:
     outputs:
       python-version:
         description: "Python version to use"
-        value: "3.13"
+        value: "3.14"
       poetry-cache-path:
         description: "Poetry cache paths"
         value: |
@@ -19,7 +19,7 @@ jobs:
   config:
     runs-on: ubuntu-latest
     outputs:
-      python-version: "3.13"
+      python-version: "3.14"
       poetry-cache-path: |
         ~/.cache/pypoetry
         ~/.poetry

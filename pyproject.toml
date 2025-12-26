@@ -4,7 +4,7 @@ version = "0.8.3"
 description = "Used to templatize python projects."
 authors = [{ name = "Loïc Motheu", email = "lmotheu@gmail.com" }]
 readme = "README.md"
-requires-python = ">=3.13,<4.0"
+requires-python = ">=3.14,<4.0"
 dependencies = [
     "loguru (>=0.7.3,<0.8.0)"
 ]
