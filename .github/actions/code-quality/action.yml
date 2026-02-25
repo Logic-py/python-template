@@ -16,14 +16,14 @@ runs:
     - name: Run Ruff Formatting
       if: inputs.check-type == 'format'
       shell: bash
-      run: poetry run ruff format --config pyproject.toml ${{ inputs.source-dir }}
+      run: uv run ruff format --config pyproject.toml ${{ inputs.source-dir }}
 
     - name: Run Ruff Linting
       if: inputs.check-type == 'lint'
       shell: bash
-      run: poetry run ruff check --config pyproject.toml ${{ inputs.source-dir }}
+      run: uv run ruff check --config pyproject.toml ${{ inputs.source-dir }}
 
     - name: Run Mypy Type Checking
       if: inputs.check-type == 'type-check'
       shell: bash
-      run: poetry run mypy --config-file pyproject.toml ${{ inputs.source-dir }}
+      run: uv run mypy --config-file pyproject.toml ${{ inputs.source-dir }}
