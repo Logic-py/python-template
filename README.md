@@ -33,18 +33,17 @@ Follow these steps to get started with this template:
 
 1. **Clone the repository or use the template directly via GitHub.**
 
-2. **Install Poetry:**
+2. **Install uv:**
 
-   Ensure you have [Poetry](https://python-poetry.org/) installed. If not, you can install it using:
+   Ensure you have [uv](https://docs.astral.sh/uv/) installed. If not, you can install it using:
    ```bash
-   pip install poetry
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
-   > **Note:** This template is set up using Poetry version 1.8.5.
 
 3. **Install dependencies:**
 
    ```bash
-   poetry install
+   uv sync
    ```
 
 4. **Ready to Implement:**
@@ -57,7 +56,7 @@ Follow these steps to get started with this template:
 This project includes a continuous integration (CI) workflow that is triggered on every push and pull request, using
 GitHub Actions to run the following jobs:
 
-1. **Setup**: Checks out the code, sets up Python, and installs dependencies using Poetry.
+1. **Setup**: Checks out the code, sets up Python, and installs dependencies using uv.
 2. **Format**: Formats the code with Ruff.
 3. **Lint**: Runs linting on the codebase with Ruff.
 4. **Type Check**: Checks for type consistency using Mypy.
@@ -79,10 +78,10 @@ This project includes the following dependencies:
     - `loguru`: ^0.7.3 (useful logging package)
 
 - **Development Dependencies**:
-    - `ruff`: ^0.8.x (for code linting and formatting)
+    - `ruff`: ^0.14.x (for code linting and formatting)
     - `mypy`: ^1.x.y (for type checking)
     - `pre-commit`: ^4.x.y (for managing Git hooks)
-    - `pytest`: ^8.x.y (for unit testing)
+    - `pytest`: ^9.x.y (for unit testing)
 
 ### Optional: Pyenv
 
@@ -147,20 +146,20 @@ This repository employs several tools to ensure code quality:
 To set up pre-commit hooks for automatic formatting and linting on commit, ensure `pre-commit` is installed:
 
 ```bash
-poetry install
+uv sync
 ```
 
 Then, install the hooks:
 
 ```bash
-poetry run pre-commit install
+uv run pre-commit install
 ```
 
 Once installed, the hooks will run automatically before each commit.
 
 ### Pre-commit Hooks Configuration
 
-This repository uses pre-commit hooks to enforce code quality and standards before committing changes. Here’s an
+This repository uses pre-commit hooks to enforce code quality and standards before committing changes. Here's an
 overview of the configured hooks:
 
 #### 1. Commitlint Hook
@@ -179,13 +178,13 @@ overview of the configured hooks:
 You can run specific hooks manually using:
 
 ```bash
-poetry run pre-commit run <HOOK-ID>
+uv run pre-commit run <HOOK-ID>
 ```
 
 For example, to run the Ruff formatter:
 
 ```bash
-poetry run pre-commit run ruff-format
+uv run pre-commit run ruff-format
 ```
 
 For more information on pre-commit, visit [pre-commit.com](https://pre-commit.com).

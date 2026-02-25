@@ -4,8 +4,8 @@
 # https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
 version: 2
 updates:
-  # Update dependencies for Python (Poetry)
-  - package-ecosystem: "pip"
+  # Update dependencies for Python (uv)
+  - package-ecosystem: "uv"
     directory: "/"
     schedule:
       interval: "daily"

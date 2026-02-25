@@ -11,22 +11,22 @@ repos:
     hooks:
       - id: ruff-format
         name: Formatting
-        entry: poetry run ruff format
-        language: python
+        entry: uv run ruff format
+        language: system
         types_or: [ python, pyi, jupyter ]
         pass_filenames: true
 
       - id: ruff-lint
         name: Linting
-        entry: poetry run ruff check
-        language: python
+        entry: uv run ruff check
+        language: system
         types_or: [ python, pyi, jupyter ]
         pass_filenames: true
         exclude: tests
 
       - id: mypy-type-check
         name: Type Checking
-        entry: poetry run mypy
-        language: python
+        entry: uv run mypy
+        language: system
         types_or: [ python, pyi, jupyter ]
         pass_filenames: true

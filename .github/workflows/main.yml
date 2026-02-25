@@ -67,7 +67,7 @@ jobs:
         with:
           python-version: ${{ needs.config.outputs.python-version }}
       - name: Run Tests
-        run: poetry run pytest
+        run: uv run pytest
 
   release:
     needs: [ config, setup, format, lint, type-check, test ]
@@ -84,7 +84,7 @@ jobs:
       - name: Read version from pyproject.toml
         id: get_version
         run: |
-          VERSION=$(poetry version --short)
+          VERSION=$(python -c "import tomllib; print(tomllib.load(open('pyproject.toml','rb'))['project']['version'])")
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
 
       - name: Check if release exists
@@ -118,7 +118,7 @@ jobs:
         run: |
           chmod +x .github/generate_changelog.sh
           source .github/generate_changelog.sh
-          
+
           echo "CHANGELOG<<EOF" >> $GITHUB_ENV
           if [ -n "${{ env.PREV_TAG }}" ]; then
             generate_categorized_changelog "${{ env.PREV_TAG }}" >> $GITHUB_ENV
@@ -135,7 +135,7 @@ jobs:
           name: ${{ env.VERSION }}
           body: |
             ${{ env.CHANGELOG }}
-            
+
             **Full Changelog**: ${{ env.URL }}
           draft: false
           prerelease: false
