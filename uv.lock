@@ -246,7 +246,7 @@ wheels = [
 
 [[package]]
 name = "python-template"
-version = "0.10.1"
+version = "0.10.2"
 source = { virtual = "." }
 dependencies = [
     { name = "loguru" },
