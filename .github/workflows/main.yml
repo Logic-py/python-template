@@ -14,7 +14,7 @@ jobs:
     needs: config
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-env
         with:
           python-version: ${{ needs.config.outputs.python-version }}
@@ -23,7 +23,7 @@ jobs:
     needs: [ config, setup ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-env
         with:
           python-version: ${{ needs.config.outputs.python-version }}
@@ -36,7 +36,7 @@ jobs:
     needs: [ config, setup ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-env
         with:
           python-version: ${{ needs.config.outputs.python-version }}
@@ -49,7 +49,7 @@ jobs:
     needs: [ config, setup ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-env
         with:
           python-version: ${{ needs.config.outputs.python-version }}
@@ -62,7 +62,7 @@ jobs:
     needs: [ config, setup ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: ./.github/actions/setup-env
         with:
           python-version: ${{ needs.config.outputs.python-version }}
@@ -74,7 +74,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup-env
