@@ -30,7 +30,7 @@ line-ending = "auto"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = ["D203", "COM812", "ISC001", "D213", "FA102"]
+ignore = ["D203", "COM812", "ISC001", "D213", "FA102", "CPY001"]
 fixable = ["ALL"]
 unfixable = []
 exclude = ["tests/*"]
